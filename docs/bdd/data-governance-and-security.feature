@@ -1,3 +1,4 @@
+@v1 @wave1 @wave6
 Feature: Data governance, security baseline, and exports
   As a platform owner
   I want enforceable governance and security controls

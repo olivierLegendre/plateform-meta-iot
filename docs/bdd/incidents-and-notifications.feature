@@ -1,3 +1,4 @@
+@v1 @wave4 @wave5
 Feature: Incident lifecycle, escalation, and notifications
   As an operations platform
   I want controlled incident governance

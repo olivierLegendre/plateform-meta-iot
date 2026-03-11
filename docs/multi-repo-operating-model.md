@@ -1,6 +1,6 @@
 # Multi-Repo Operating Model
 
-Status: Draft v1.0  
+Status: Draft v1.1  
 Date: 2026-03-11
 
 ## 1. Goal
@@ -34,9 +34,10 @@ Recommended repositories:
 1. `reference-api-service` (Python)
 2. `device-ingestion-service` (Python + `paho-mqtt`)
 3. `automation-scenario-service` (Camunda integration layer, TypeScript)
-4. `operator-ui` (Next.js)
-5. `identity-access-config` (Keycloak realm/client/policy IaC)
-6. `platform-foundation` (runtime infrastructure and secrets bootstrap)
+4. `channel-policy-router` (Python)
+5. `operator-ui` (Next.js)
+6. `identity-access-config` (Keycloak realm/client/policy IaC)
+7. `platform-foundation` (runtime infrastructure and secrets bootstrap)
 
 Post-V1 adapters:
 
@@ -95,7 +96,7 @@ Apply these defaults on your git platform:
 
 1. Service behavior change:
   - service repo PR
-  - if contract impact, also update meta repo docs/matrix
+  - if contract impact, also update meta repo documentation and compatibility matrix
 2. Cross-cutting architecture change:
   - ADR in meta repo
   - referenced by service PRs
@@ -117,26 +118,45 @@ Recommended modes:
 Example local parent directory:
 
 ```text
-~/work/platform/
+~/work/iot_services/
   plateform-meta-iot/
   reference-api-service/
   device-ingestion-service/
   automation-scenario-service/
+  channel-policy-router/
   operator-ui/
   identity-access-config/
   platform-foundation/
 ```
 
-## 8. How To Start
+## 8. Migration Execution Alignment
+
+The migration plan uses waves (`Wave 0` to `Wave 7`) defined in
+`docs/target-architecture-and-migration.md`.
+
+Each repo should align milestones to those waves:
+
+1. Service skeleton and boundaries.
+2. Contract and compatibility tests.
+3. Production hardening and rollback runbooks.
+
+## 9. How To Start
 
 1. Keep this repo as architecture and integration control plane.
 2. Create each service as an independent git repository.
 3. Register the repositories in `repos/repos.manifest.yaml`.
 4. Use `scripts/bootstrap_local_repos.sh` to initialize local repositories quickly.
-5. Start with `reference-api-service` and `device-ingestion-service`.
+5. Start with `reference-api-service`, `device-ingestion-service`, and `channel-policy-router`.
 
-## 9. Context Window Note
+If this repository is not already under an `iot_services/` parent directory,
+move it before or after bootstrap:
 
-Storing specs in `docs/` does not consume runtime context by itself. Context is consumed only when
-files are opened or pasted in a session.
+```bash
+mkdir -p ~/work/iot_services
+mv ~/work/plateform-meta-iot ~/work/iot_services/
+```
 
+## 10. Context Window Note
+
+Storing specs in `docs/` does not consume runtime context by itself.
+Context is consumed only when files are opened or pasted in a session.

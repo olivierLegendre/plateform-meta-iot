@@ -1,3 +1,4 @@
+@v1 @wave4
 Feature: Command execution policy and channel fallback
   As a platform
   I want deterministic command behavior per class
@@ -8,12 +9,14 @@ Feature: Command execution policy and channel fallback
     And API is the primary channel
     And API and MQTT are handled by separate components
 
+  @wave4
   Scenario: Safety critical command uses API only
     Given a command of class "safety_critical"
     When dispatch policy is evaluated
     Then channel is "API"
     And MQTT fallback is not allowed
 
+  @wave4
   Scenario: Interactive control falls back to MQTT after API timeout
     Given a command of class "interactive_control"
     And API timeout threshold is 3 seconds
@@ -22,6 +25,7 @@ Feature: Command execution policy and channel fallback
     Then fallback channel is "MQTT"
     And MQTT retry budget is 2
 
+  @wave4
   Scenario: Routine automation falls back after two API attempts
     Given a command of class "routine_automation"
     And API timeout threshold is 10 seconds
@@ -30,12 +34,14 @@ Feature: Command execution policy and channel fallback
     Then fallback channel is "MQTT"
     And MQTT retry budget is 3
 
+  @wave4
   Scenario: Bulk non critical remains API-only
     Given a command of class "bulk_non_critical"
     When dispatch policy is evaluated
     Then channel is "API"
     And MQTT fallback is disabled
 
+  @wave4
   Scenario: Safety critical success requires observed state
     Given a "safety_critical" command is sent
     And transport acknowledgement is received
@@ -43,6 +49,7 @@ Feature: Command execution policy and channel fallback
     When reconciliation deadline is reached
     Then command result is "failed"
 
+  @wave4
   Scenario: SLA breach on safety critical triggers immediate action
     Given a "safety_critical" command is accepted
     And applied confirmation is not observed within 60 seconds
@@ -51,12 +58,14 @@ Feature: Command execution policy and channel fallback
     And high-severity alert is generated
     And manual operator action is required
 
+  @wave4
   Scenario: Command is immutable after accepted
     Given a command has status "accepted"
     When a payload update is requested
     Then the update is rejected
     And caller is instructed to use cancel-and-reissue
 
+  @wave4
   Scenario: Cancel is allowed only before dispatch
     Given a command with status "accepted"
     When cancel is requested
@@ -65,6 +74,7 @@ Feature: Command execution policy and channel fallback
     When cancel is requested
     Then cancel is rejected
 
+  @wave4
   Scenario: Channel override is restricted and audited
     Given user "u_ops" has designated operations override role
     When "u_ops" requests channel override for a command
@@ -72,11 +82,13 @@ Feature: Command execution policy and channel fallback
     Then override is accepted
     And override action is audited
 
+  @wave4
   Scenario: Safety critical missing idempotency key is rejected
     Given a "safety_critical" command request has no idempotency key
     When the API validates request
     Then response code is 422
 
+  @wave4
   Scenario: Safety critical missing correlation id is rejected
     Given a "safety_critical" command request has no correlation id
     When the API validates request

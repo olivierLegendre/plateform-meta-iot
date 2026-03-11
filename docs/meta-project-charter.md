@@ -1,6 +1,6 @@
 # Meta-Project Charter
 
-Status: Draft v0.2  
+Status: Draft v0.3  
 Date: 2026-03-11  
 Owner: Platform team
 
@@ -9,6 +9,8 @@ Companion documents:
 1. Detailed V1 specification: `docs/v1-system-specification.md`
 2. BDD use-case suite: `docs/bdd/README.md`
 3. Multi-repo setup and governance: `docs/multi-repo-operating-model.md`
+4. Target migration waves: `docs/target-architecture-and-migration.md`
+5. Fast context anchor: `docs/baseline-snapshot.md`
 
 ## 1. Mission
 
@@ -38,7 +40,9 @@ contracts, and integration governance.
 7. Operator UI uses Next.js.
 8. IAM uses Keycloak from the beginning.
 9. Vault is in V1 scope and is a production go-live blocker.
-10. Partner integrations are post-V1, with rollout order: Schneider BACnet adapter first,
+10. API is primary command channel; MQTT is optional fallback by explicit policy.
+11. API and MQTT responsibilities must be separated into distinct components.
+12. Partner integrations are post-V1, with rollout order: Schneider BACnet adapter first,
 Tandem Connect adapter second, Siemens Building X API adapter third.
 
 ## 3. Scope
@@ -65,8 +69,9 @@ Out of scope (V1):
 1. Hexagonal architecture per service (transport -> domain -> infrastructure).
 2. Domain logic must stay framework-agnostic.
 3. Repository + Unit of Work at persistence boundaries.
-4. Backward compatibility first during migration.
-5. No hidden side effects or mutable shared global state.
+4. Adapter + ACL boundaries for partner/protocol integration.
+5. Backward compatibility first during migration.
+6. No hidden side effects or mutable shared global state.
 
 ## 5. Subproject Model
 
@@ -97,7 +102,7 @@ Owns:
 
 - Keycloak realm, client, role, and policy governance.
 
-## 5.3 `iot-ingestion-service`
+## 5.3 `device-ingestion-service`
 
 Role:
 
@@ -106,14 +111,14 @@ Role:
 Owns:
 
 - Ingestion domain rules.
-- Idempotency/dedup logic.
+- Idempotency and dedup logic.
 - Mapping application pipeline.
 
-## 5.4 `iot-reference-api`
+## 5.4 `reference-api-service`
 
 Role:
 
-- Expose and manage device references, mappings, and links.
+- Expose and manage device references, mappings, links, and command API contracts.
 
 Owns:
 
@@ -174,10 +179,10 @@ Rules:
 
 Cadence:
 
-- Architecture review per phase.
+- Architecture review per migration wave.
 - Weekly migration checkpoint.
 
-Required artifacts per phase:
+Required artifacts per wave:
 
 1. ADRs for boundary decisions.
 2. Updated compatibility matrix.
@@ -198,5 +203,5 @@ Done when:
 
 1. Orchestrator starts all subprojects reproducibly with one command profile.
 2. Canonical contracts are versioned and validated in CI.
-3. Extraction phases pass acceptance criteria and rollback checks.
-4. Node-RED is reduced to orchestration/UI glue or retired by explicit decision.
+3. Migration waves pass acceptance criteria and rollback checks.
+4. Node-RED is reduced to orchestration or edge glue, or retired by explicit decision.

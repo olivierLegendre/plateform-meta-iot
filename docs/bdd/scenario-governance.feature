@@ -1,3 +1,4 @@
+@v1 @wave5
 Feature: Scenario governance and publication controls
   As a platform operator
   I want strict governance over automation scenario changes

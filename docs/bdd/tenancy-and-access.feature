@@ -1,3 +1,4 @@
+@v1 @wave1 @wave2
 Feature: Tenancy and access control
   As a platform operator
   I want strict tenancy and scope enforcement

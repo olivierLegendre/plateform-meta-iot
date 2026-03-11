@@ -1,6 +1,6 @@
 # Target Architecture And Migration Plan
 
-Status: Draft v0.2  
+Status: Draft v0.3  
 Date: 2026-03-11  
 Baseline: `/home/olivier/Public/poc`
 
@@ -9,236 +9,332 @@ Companion documents:
 1. Detailed V1 specification: `docs/v1-system-specification.md`
 2. BDD use-case suite: `docs/bdd/README.md`
 3. Multi-repo setup and governance: `docs/multi-repo-operating-model.md`
+4. Fast context anchor: `docs/baseline-snapshot.md`
 
 ## 0. Locked Decisions Snapshot
 
-1. V1 includes all core capabilities except partner runtime integrations.
+1. V1 includes all core platform capabilities except partner runtime integrations.
 2. Node-RED is migration-only integration or edge glue and cannot host core logic at V1 GA.
-3. Stack choices are fixed: Python services, `paho-mqtt`, Next.js operator UI, Camunda with
-TypeScript integration layer, Keycloak IAM, Grafana OSS.
+3. Stack choices are fixed: Python services, `paho-mqtt`, Next.js operator UI, Camunda with TypeScript integration layer, Keycloak IAM, Grafana OSS.
 4. Vault is mandatory in V1 and blocks first production go-live if missing.
 5. DB-level tenant isolation in PostgreSQL is required in V1.
 6. API path versioning with 90-day overlap and deprecation warnings is required.
-7. Post-V1 partner integration rollout order is Schneider BACnet first, Tandem Connect second,
-Siemens Building X API third.
+7. API is primary channel; MQTT is optional fallback by policy and must be handled in separate components.
+8. Post-V1 partner rollout order is Schneider BACnet first, Tandem Connect second, Siemens Building X API third.
 
-## 1. Current PoC Snapshot
+## 1. Pattern-Driven Architecture Frame
 
-The PoC currently centralizes ingestion, API, mapping logic, and dashboard behavior in Node-RED.
-Important observations from the baseline:
+This plan uses pattern guidance from:
 
-1. Clear logic split already exists through `domain` and `repo` libraries loaded in
-   `functionGlobalContext`.
-2. API endpoints already exist for device references, mappings, and links.
-3. Runtime scenario logic is partially hardcoded to specific device names/topics.
-4. Mapping replacement flow can be destructive if payload validation is bypassed by shape.
+- `agents/patterns/architecture.md`
+- `agents/patterns/integration.md`
+- `agents/patterns/data-access.md`
+- `agents/architecture.md`
 
-This is a good base for extraction because interfaces are visible, even if runtime boundaries are
-still coupled.
+### 1.1 Selected pattern set
 
-## 2. Target Architecture
+1. Boundary and module design:
+- Hexagonal Architecture + Clean dependency direction.
+- Anti-Corruption Layer for legacy/external model mismatch.
 
-## 2.1 High-level topology (current target)
+2. External integration and resilience:
+- Adapter + Facade for protocol/provider isolation.
+- Circuit Breaker + Retry with Backoff + Bulkhead for fault containment.
+- Outbox for reliable event publication tied to DB commits.
 
-1. `plateform-meta-iot`: orchestrator, standards, contract governance, and integration CI.
-2. `platform-foundation`: shared runtime infrastructure, networking, and secrets baseline.
-3. `identity-access`: Keycloak configuration and policy governance.
-4. `iot-reference-api`: reference/mapping APIs and semantic governance.
-5. `iot-ingestion-service`: MQTT intake, normalization, deduplication, and metric persistence.
-6. `automation-scenario-service`: workflow orchestration through Camunda.
-7. `channel-policy-router`: API-primary channel policy and fallback execution.
-8. `operator-ui`: Next.js operational user interface.
-9. `partner-integration-layer` (post-V1): external adapters for Schneider, Tandem, Siemens.
+3. Persistence:
+- Repository + Unit of Work + Data Mapper as default in Python services.
 
-## 2.2 Boundary rules
+### 1.2 Patterns explicitly deferred
 
-1. Transport adapters (HTTP/MQTT) never embed business rules.
+1. Full event sourcing in V1.
+2. Full CQRS split in V1 (activate only when read/write divergence becomes a measured bottleneck).
+3. Premature microservice split of low-change shared utilities.
+
+## 2. Target Topology And Ownership
+
+Canonical service boundaries:
+
+1. `plateform-meta-iot`
+- Orchestration, standards, ADRs, contract governance, integration CI.
+
+2. `platform-foundation`
+- Runtime infrastructure, networking baseline, secret and operational baseline.
+
+3. `identity-access`
+- Keycloak realm/client/role/policy governance.
+
+4. `reference-api-service` (Python)
+- Canonical API contracts and domain services for references, mappings, links, command API surface.
+
+5. `device-ingestion-service` (Python)
+- MQTT intake, normalization, deduplication, write-path ownership for ingestion data.
+
+6. `automation-scenario-service`
+- Camunda orchestration plus TypeScript integration workers.
+
+7. `channel-policy-router`
+- Command channel strategy and fallback execution policy (API primary, MQTT optional fallback).
+
+8. `operator-ui` (Next.js)
+- Operational and governance workflows.
+
+9. `partner-integration-layer` (post-V1)
+- Schneider BACnet adapter, Tandem Connect adapter, Siemens Building X API adapter.
+
+Boundary rules:
+
+1. Transport adapters never embed business rules.
 2. Domain services own validation and orchestration decisions.
 3. Repositories own SQL and transaction boundaries.
-4. Cross-service communication uses versioned contracts only.
-5. No direct DB access from UI/service clients outside their ownership rules.
+4. Cross-service interactions use versioned contracts only.
+5. UI and external clients never bypass service ownership with direct DB access.
 
-## 2.3 Data ownership (target)
+## 3. Migration Strategy
 
-1. `iot-ingestion-service` owns write path for `devices`, `telemetry`, `metrics`.
-2. `iot-reference-api` owns `device_reference*` and mapping lifecycle.
-3. Read models can be shared, but write ownership is single-service per aggregate.
+Strategy is strangler-first with progressive extraction and reversible cutovers.
 
-## 3. Migration Phases
+Execution rules:
 
-Each phase includes rollback and acceptance criteria. Do not start next phase until current
-acceptance is green.
+1. Each wave has explicit entry criteria, acceptance criteria, and rollback.
+2. No wave starts before prior wave acceptance is fully green.
+3. All high-risk switches are feature-flagged.
 
-## Phase 0: Freeze and baseline
+## 4. Wave Plan (Structured V2)
 
-Scope:
-
-- Freeze PoC behavior and capture contracts.
-
-Deliverables:
-
-1. Contract inventory (topics, payloads, endpoints, DB objects).
-2. Golden dataset and golden API responses for regression comparison.
-3. CI smoke workflow in meta-project.
-
-Acceptance criteria:
-
-1. Baseline smoke checks pass reproducibly on a clean environment.
-2. All current API endpoints have request/response examples versioned in repo.
-3. Rollback script documented and validated once.
-
-## Phase 1: Contract-first extraction prep
+## Wave 0: Contract And Boundary Freeze
 
 Scope:
 
-- Formalize contracts before moving code.
+- Freeze observed PoC behavior and define ownership boundaries.
 
 Deliverables:
 
-1. OpenAPI for reference APIs.
-2. JSON Schema/AsyncAPI-style definitions for MQTT payloads.
-3. DB ownership matrix by table.
+1. Contract inventory for API endpoints, MQTT topics, payload shapes, DB objects.
+2. Golden dataset and golden response/event fixtures.
+3. ADR pack for selected pattern set and rejected alternatives.
+4. Ownership matrix by service and aggregate.
 
 Acceptance criteria:
 
-1. Contract lint checks run in CI.
-2. Compatibility tests verify current PoC behavior against contract docs.
-3. Any contract drift fails CI.
-
-## Phase 2: Extract `iot-reference-api`
-
-Scope:
-
-- Move reference/mapping/link business logic out of Node-RED.
-
-Deliverables:
-
-1. New API service with hexagonal layers.
-2. Repository + Unit of Work implementation for reference aggregates.
-3. Compatibility adapter: Node-RED calls new API instead of local logic.
-
-Acceptance criteria:
-
-1. Existing clients can call same endpoint semantics with no functional regressions.
-2. Validation and error model remain backward compatible (or versioned explicitly).
-3. Integration tests pass for create/update/link/mapping replace workflows.
-4. Destructive mapping edge case is fixed and tested.
+1. Contract inventory is complete and versioned.
+2. Golden smoke suite passes in clean environment.
+3. Ownership matrix has no unresolved aggregate.
 
 Rollback:
 
-- Switch Node-RED back to local API path behind a feature flag.
+- Not applicable (documentation and governance wave).
 
-## Phase 3: Extract `iot-ingestion-service`
+## Wave 1: Foundation And Security Baseline
 
 Scope:
 
-- Move MQTT normalization/dedup/mapping materialization out of Node-RED.
+- Stand up shared runtime and mandatory security controls.
 
 Deliverables:
 
-1. Ingestion worker service with domain adapters for Zigbee and LoRaWAN.
-2. Idempotent write path and dedup policy tests.
-3. Operational metrics and structured logs.
+1. `platform-foundation` baseline runtime and networking.
+2. Keycloak realm, clients, role model and token validation baseline.
+3. Vault operational baseline (go-live blocker).
+4. PostgreSQL tenant isolation baseline (organization-level isolation).
+5. Grafana OSS baseline dashboards and alert scaffolding.
 
 Acceptance criteria:
 
-1. Metric counts and key field values match baseline within agreed tolerance.
-2. End-to-end latency budget is met (define target in CI benchmarks).
-3. Duplicate suppression behavior is deterministic and tested.
+1. Authn/authz checks pass at service boundary tests.
+2. Secrets are not stored in code or plain env files outside approved bootstrap path.
+3. Isolation tests prove cross-organization read/write denial.
 
 Rollback:
 
-- Disable worker consumer group and re-enable Node-RED ingestion flow.
+- Keep PoC runtime path as temporary operational path while foundation hardening continues.
 
-## Phase 4: Operator UI and command governance decoupling
+## Wave 2: `reference-api-service` Extraction (Python)
 
-Scope:
+Pattern focus:
 
-- Move UI, approvals, and incident operations to `operator-ui`.
-
-Deliverables:
-
-1. UI pages read from APIs/services only.
-2. Command approval and incident flows are run outside Node-RED.
-
-Acceptance criteria:
-
-1. All critical operational views are available in `operator-ui`.
-2. No direct domain SQL in UI layer.
-3. User actions are traceable via logs and correlation ids.
-
-## Phase 5: Harden and remove residual coupling
+- Hexagonal boundaries + Repository/UoW/Data Mapper.
 
 Scope:
 
-- Security, observability, and cleanup.
+- Move reference/mapping/link core logic out of Node-RED.
 
 Deliverables:
 
-1. Auth/authz strategy for admin and APIs.
-2. SLO dashboards and alerting for critical flows.
-3. Decommission plan for obsolete Node-RED logic and bridge-only operation enforcement.
+1. Service skeleton with explicit domain/application/adapter boundaries.
+2. Repository/UoW implementation for owned aggregates.
+3. Compatibility adapter so existing flows call new service.
+4. Backward-compatible error and validation contract behavior.
 
 Acceptance criteria:
 
-1. Security checks enabled by default (no insecure admin defaults).
-2. Error budgets and SLOs tracked for ingestion/API paths.
-3. Residual Node-RED business logic reduced to agreed target or zero.
+1. Regression parity for create/update/link/mapping workflows.
+2. Existing clients run without breaking change unless versioned explicitly.
+3. Known destructive mapping edge case is covered by tests and resolved.
 
-## Phase 6: Partner integration rollout (post-V1)
+Rollback:
+
+- Feature flag route back to legacy path.
+
+## Wave 3: `device-ingestion-service` Extraction (Python + `paho-mqtt`)
+
+Pattern focus:
+
+- Adapter/ACL for protocol normalization + Outbox for reliable publication.
 
 Scope:
 
-- Add external partner adapters without breaking core platform boundaries.
+- Move ingestion and normalization from Node-RED to dedicated service.
 
 Deliverables:
 
-1. Schneider BACnet adapter with read-only commissioning first.
-2. Tandem Connect adapter for digital twin synchronization flows.
-3. Siemens Building X API adapter for API-driven integration.
+1. Protocol adapters for current ingestion sources.
+2. Deterministic dedup and idempotent write path.
+3. Structured logs, ingest metrics, and dead-letter handling policy.
 
 Acceptance criteria:
 
-1. Each adapter passes contract and isolation tests.
-2. Commands and telemetry remain canonicalized through platform semantic model.
-3. No adapter bypasses core authorization or audit policies.
+1. Telemetry parity against golden baseline within agreed tolerance.
+2. Duplicate suppression behavior is deterministic.
+3. Ingestion latency budget is met for pilot load.
 
-## 4. Cross-Phase Quality Gates
+Rollback:
+
+- Disable new consumer path and re-enable Node-RED ingest path.
+
+## Wave 4: Command And Safety Plane
+
+Pattern focus:
+
+- Strategy by command class + Circuit Breaker/Retry/Bulkhead.
+
+Scope:
+
+- Externalize channel policy and safety governance from Node-RED.
+
+Deliverables:
+
+1. `channel-policy-router` with class-based policy matrix.
+2. API primary with MQTT optional fallback policy enforcement.
+3. Queueing, serialization, idempotency, and reconciliation controls matching V1 spec.
+4. Incident and hold/resume integration points.
+
+Acceptance criteria:
+
+1. `422`, `503`, `Retry-After`, and safety restrictions behave exactly as spec.
+2. Queue policy and safety-critical prioritization are test-verified.
+3. Reconciliation SLA measurement is visible in dashboards.
+
+Rollback:
+
+- Toggle to API-only safe mode and hold non-safety execution if needed.
+
+## Wave 5: Automation And Operator UI Decoupling
+
+Scope:
+
+- Move operations workflows fully into dedicated orchestration and UI.
+
+Deliverables:
+
+1. Camunda integration layer and workflow runtime paths.
+2. `operator-ui` flows for approvals, incidents, reissue, and governance views.
+3. Traceability and audit visibility for user actions.
+
+Acceptance criteria:
+
+1. Critical operational workflows run outside Node-RED core logic.
+2. UI uses service APIs only; no direct SQL access.
+3. End-to-end traceability available via correlation and command lineage.
+
+Rollback:
+
+- Read-only operator mode plus execution hold policy while fixing critical issues.
+
+## Wave 6: Node-RED Retirement And Hardening
+
+Scope:
+
+- Remove residual critical dependency on Node-RED.
+
+Deliverables:
+
+1. Explicit list of remaining Node-RED flows and decommission decisions.
+2. Runbooks for incident, rollback, and recovery per service.
+3. SLO dashboards and alerting active for ingestion/API/command paths.
+
+Acceptance criteria:
+
+1. No critical business rule depends on Node-RED state.
+2. Remaining Node-RED role is bridge-only or fully retired by decision.
+3. Operational readiness checklist is green.
+
+Rollback:
+
+- Temporarily re-enable selected bridge paths only, with change-control approval.
+
+## Wave 7: Partner Integration Rollout (Post-V1)
+
+Scope:
+
+- Add partner adapters without violating core ownership and policy boundaries.
+
+Deliverables:
+
+1. Schneider BACnet adapter (commissioning and read path first).
+2. Tandem Connect adapter.
+3. Siemens Building X API adapter.
+
+Acceptance criteria:
+
+1. Adapter contracts pass compatibility and isolation tests.
+2. No adapter bypasses IAM, audit, or command policy controls.
+3. Semantic mapping remains canonical at platform boundary.
+
+Rollback:
+
+- Disable adapter route and preserve canonical internal flows.
+
+## 5. Cross-Wave Quality Gates
 
 Required for each merge:
 
-1. Lint + typecheck + unit tests.
+1. Lint, typecheck, unit tests.
 2. Integration tests at service boundaries.
-3. Backward compatibility checks for API and schemas.
-4. Migration and rollback verification for DB-affecting changes.
-5. Observability checks for new critical paths.
+3. Backward compatibility checks for API/schema/topic contracts.
+4. Migration and rollback verification for DB-impacting changes.
+5. Observability checks on new critical paths.
+6. Security checks for authz, secrets, and tenant isolation.
 
-## 5. Alternative Architecture Considered
+## 6. Architecture Options Reviewed
 
-Alternative: keep Node-RED as the primary runtime and only refactor internals.
+Option A: Keep Node-RED as primary runtime and refactor internally.
 
-Pros:
+1. Pros:
+- Fast short-term execution.
 
-1. Faster short-term delivery.
-2. Lower initial migration effort.
+2. Cons:
+- Persistent coupling and lower long-term change safety.
 
-Cons:
+Option B: Pattern-driven strangler extraction (selected).
 
-1. Persistent runtime coupling.
-2. Harder independent scaling/testing/deployment per concern.
-3. Higher long-term change risk for critical business rules.
+1. Pros:
+- Clear ownership boundaries, better testability, safer progressive rollout.
+
+2. Cons:
+- Higher up-front governance effort.
 
 Decision:
 
-- Prefer service extraction with the meta-project orchestrator because it improves boundaries,
-  testability, and controlled evolution.
+- Option B is selected.
 
-## 6. Final Acceptance (Program Exit Criteria)
+## 7. Program Exit Criteria
 
 Migration is complete when all statements are true:
 
-1. Core ingestion and reference APIs run in independent deployable services.
-2. Canonical contracts are versioned and enforced by CI.
-3. PoC scenarios are reproducible from meta-project orchestration only.
-4. No critical business rule depends on Node-RED function node state.
-5. Runbooks include on-call troubleshooting and rollback for each service.
+1. `reference-api-service` and `device-ingestion-service` run as independent deployable services.
+2. Command and fallback governance executes outside Node-RED core runtime.
+3. Canonical contracts are versioned and enforced by CI.
+4. Security baseline is complete, including Vault and DB-level tenant isolation.
+5. Operator workflows are served from `operator-ui` and orchestration runtime.
+6. Runbooks cover rollback and incident operations for each production service.

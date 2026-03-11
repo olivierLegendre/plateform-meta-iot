@@ -1,22 +1,38 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Bootstraps local independent git repositories next to the meta-repo.
+# Bootstraps local independent git repositories in a shared "iot_services" parent directory.
 # It does not configure remote origins; that is done after repository creation
 # on your git hosting platform.
 
-BASE_DIR="${1:-$(cd .. && pwd)}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+META_REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+PARENT_DIR="$(cd "$META_REPO_DIR/.." && pwd)"
+
+if [[ "$(basename "$PARENT_DIR")" == "iot_services" ]]; then
+  DEFAULT_BASE_DIR="$PARENT_DIR"
+else
+  DEFAULT_BASE_DIR="$PARENT_DIR/iot_services"
+fi
+
+BASE_DIR="${1:-$DEFAULT_BASE_DIR}"
 
 REPOS=(
   "reference-api-service:python"
   "device-ingestion-service:python"
   "automation-scenario-service:node"
+  "channel-policy-router:python"
   "operator-ui:node"
   "identity-access-config:config"
   "platform-foundation:infra"
 )
 
 log() { printf '%s\n' "$*"; }
+
+if [[ "$(basename "$PARENT_DIR")" != "iot_services" && $# -eq 0 ]]; then
+  log "Note: meta-repo is not under an iot_services parent directory."
+  log "Default bootstrap target will be: $BASE_DIR"
+fi
 
 create_common_files() {
   local repo_dir="$1"
@@ -112,4 +128,3 @@ done
 log
 log "Done. Repositories created under: $BASE_DIR"
 log "Next: add remotes and push each repository to your git hosting platform."
-
