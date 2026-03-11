@@ -1,0 +1,39 @@
+# Repository manifest for the platform multi-repo model.
+# This file is owned by the meta-repo and used for governance and local bootstrap.
+
+meta_repo:
+  name: plateform-meta-iot
+  role: architecture-governance-and-integration
+  local_path: .
+
+service_repos:
+  - name: reference-api-service
+    type: python
+    role: reference-and-command-api
+  - name: device-ingestion-service
+    type: python
+    role: mqtt-ingestion-and-normalization
+  - name: automation-scenario-service
+    type: node
+    role: camunda-integration-layer
+  - name: operator-ui
+    type: node
+    role: operational-nextjs-ui
+  - name: identity-access-config
+    type: config
+    role: keycloak-iam-configuration
+  - name: platform-foundation
+    type: infra
+    role: shared-runtime-network-vault
+
+post_v1_partner_repos:
+  - name: schneider-bacnet-adapter
+    type: python
+    role: schneider-bacnet-integration
+  - name: tandem-connect-adapter
+    type: python
+    role: autodesk-tandem-connect-integration
+  - name: siemens-buildingx-adapter
+    type: python
+    role: siemens-buildingx-api-integration
+
