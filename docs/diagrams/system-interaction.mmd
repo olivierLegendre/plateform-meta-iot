@@ -1,0 +1,38 @@
+flowchart LR
+  User[Operator User] --> UI[operator-ui\nNext.js]
+  UI --> REF[reference-api-service\nAPI + metadata]
+  UI --> AUTO[automation-scenario-service\nworkflow APIs]
+  UI --> ROUTER[channel-policy-router\ncommand policy + safety]
+
+  Keycloak[identity-access-config\nKeycloak] --> UI
+  Keycloak --> REF
+  Keycloak --> AUTO
+  Keycloak --> ROUTER
+
+  Devices[Field Devices / Gateways] --> INGEST[device-ingestion-service\nMQTT ingest + normalize]
+  INGEST --> REF
+
+  REF --> ROUTER
+  AUTO --> ROUTER
+
+  ROUTER --> APIChannel[Primary API channel]
+  ROUTER --> MQTTChannel[Optional MQTT fallback]
+
+  Foundation[platform-foundation\nPostgres + MQTT + Vault + Observability] --- INGEST
+  Foundation --- REF
+  Foundation --- ROUTER
+  Foundation --- AUTO
+  Foundation --- UI
+
+  subgraph PostV1[Post-V1 Partner Integration Layer]
+    SCH[schneider-bacnet-adapter]
+    TAN[tandem-connect-adapter]
+    SIE[siemens-buildingx-adapter]
+  end
+
+  ROUTER --> SCH
+  ROUTER --> TAN
+  ROUTER --> SIE
+  REF --> SCH
+  REF --> TAN
+  REF --> SIE

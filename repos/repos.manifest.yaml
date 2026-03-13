@@ -16,6 +16,9 @@ service_repos:
   - name: automation-scenario-service
     type: node
     role: camunda-integration-layer
+  - name: channel-policy-router
+    type: python
+    role: command-channel-policy-and-safety
   - name: operator-ui
     type: node
     role: operational-nextjs-ui

@@ -1,0 +1,26 @@
+sequenceDiagram
+  participant UI as operator-ui
+  participant REF as reference-api-service
+  participant AUT as automation-scenario-service
+  participant CPR as channel-policy-router
+  participant DEV as Device/Partner endpoint
+
+  UI->>REF: create command request (API contract)
+  REF->>AUT: start/attach workflow context (optional)
+  REF->>CPR: submit command + class + correlation/idempotency
+
+  CPR->>CPR: policy evaluation\n(class, site policy, safety state)
+  CPR->>CPR: queue/idempotency/correlation checks
+
+  alt API primary available
+    CPR->>DEV: dispatch via API
+  else API unavailable and fallback allowed
+    CPR->>DEV: dispatch via MQTT
+  else blocked by policy/safety
+    CPR-->>REF: reject (422/503/etc)
+  end
+
+  CPR->>CPR: reconcile within SLA window
+  CPR-->>AUT: incident/hook event when needed
+  AUT-->>UI: workflow status update
+  REF-->>UI: command status and lineage
