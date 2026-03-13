@@ -14,8 +14,8 @@ service_repos:
     type: python
     role: mqtt-ingestion-and-normalization
   - name: automation-scenario-service
-    type: node
-    role: camunda-integration-layer
+    type: hybrid
+    role: python-workflow-service-with-typescript-camunda-worker
   - name: channel-policy-router
     type: python
     role: command-channel-policy-and-safety

@@ -1,7 +1,7 @@
 # Target Architecture And Migration Plan
 
-Status: Draft v0.3  
-Date: 2026-03-11  
+Status: Draft v0.4
+Date: 2026-03-13  
 Baseline: `/home/olivier/Public/poc`
 
 Companion documents:
@@ -10,6 +10,7 @@ Companion documents:
 2. BDD use-case suite: `docs/bdd/README.md`
 3. Multi-repo setup and governance: `docs/multi-repo-operating-model.md`
 4. Fast context anchor: `docs/baseline-snapshot.md`
+5. Wave 4 closure evidence: `docs/wave-4-closure-checkpoint.md`
 
 ## 0. Locked Decisions Snapshot
 
@@ -228,6 +229,11 @@ Acceptance criteria:
 Rollback:
 
 - Toggle to API-only safe mode and hold non-safety execution if needed.
+
+Wave 4 closure evidence:
+
+- Frozen checkpoint: `docs/wave-4-closure-checkpoint.md`.
+- Validation status: green on 2026-03-13 (lint, typecheck, unit/API tests, Postgres integration).
 
 ## Wave 5: Automation And Operator UI Decoupling
 

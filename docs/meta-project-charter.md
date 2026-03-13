@@ -1,7 +1,7 @@
 # Meta-Project Charter
 
-Status: Draft v0.3  
-Date: 2026-03-11  
+Status: Draft v0.4
+Date: 2026-03-13  
 Owner: Platform team
 
 Companion documents:
@@ -11,6 +11,7 @@ Companion documents:
 3. Multi-repo setup and governance: `docs/multi-repo-operating-model.md`
 4. Target migration waves: `docs/target-architecture-and-migration.md`
 5. Fast context anchor: `docs/baseline-snapshot.md`
+6. Wave 4 closure checkpoint: `docs/wave-4-closure-checkpoint.md`
 
 ## 1. Mission
 

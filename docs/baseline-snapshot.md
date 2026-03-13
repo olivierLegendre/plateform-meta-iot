@@ -1,6 +1,6 @@
 # Baseline Snapshot (Single Page)
 
-Last updated: 2026-03-11
+Last updated: 2026-03-13
 Purpose: quick context re-anchor after long sessions or context compaction.
 
 ## 1) Mission
@@ -88,7 +88,11 @@ Purpose: quick context re-anchor after long sessions or context compaction.
 - Partner integration rollout order: Schneider BACnet adapter, Tandem Connect adapter, Siemens Building X API adapter.
 - Metabase optional for ad-hoc BI.
 
-## 12) How To Use This File
+## 12) Current Delivery Status
+- Wave 4 (Command and Safety Plane) is frozen and validated.
+- Evidence: `docs/wave-4-closure-checkpoint.md`.
+
+## 13) How To Use This File
 - Read this file first when starting a new session.
 - If any decision here conflicts with detailed docs, update this file immediately after final decision.
 - Keep this page concise and decision-oriented; detailed rationale stays in architecture/spec docs.
