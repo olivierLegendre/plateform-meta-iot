@@ -39,7 +39,7 @@ Post-V1 partner rollout order:
 2. Backend default language: Python.
 3. MQTT client library: `paho-mqtt`.
 4. Workflow orchestration: Camunda, with TypeScript integration layer.
-5. Operator UI: Next.js.
+5. Operator UI: Vue.js (Vue 3 + Vite).
 6. Observability: Grafana OSS in V1, Metabase later.
 7. Node-RED strategy:
   - Temporary integration or edge bridge only during migration.
@@ -69,7 +69,7 @@ Post-V1 partner rollout order:
 - Camunda process execution and workflow governance.
 - TypeScript integration workers for Camunda interaction.
 
-6. `operator-ui` (Next.js)
+6. `operator-ui` (Vue.js)
 - Operational workflows, approvals, incidents, reissue actions, governance screens.
 
 7. `channel-policy-router`

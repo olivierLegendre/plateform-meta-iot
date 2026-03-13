@@ -122,7 +122,7 @@ Does not own:
 
 ```mermaid
 flowchart LR
-  User[Operator User] --> UI[operator-ui\nNext.js]
+  User[Operator User] --> UI[operator-ui\nVue.js]
   UI --> REF[reference-api-service\nAPI + metadata]
   UI --> AUTO[automation-scenario-service\nworkflow APIs]
   UI --> ROUTER[channel-policy-router\ncommand policy + safety]

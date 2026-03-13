@@ -21,7 +21,7 @@ service_repos:
     role: command-channel-policy-and-safety
   - name: operator-ui
     type: node
-    role: operational-nextjs-ui
+    role: operational-vue-ui
   - name: identity-access-config
     type: config
     role: keycloak-iam-configuration

@@ -35,7 +35,7 @@ Recommended repositories:
 2. `device-ingestion-service` (Python + `paho-mqtt`)
 3. `automation-scenario-service` (Camunda integration layer, TypeScript)
 4. `channel-policy-router` (Python)
-5. `operator-ui` (Next.js)
+5. `operator-ui` (Vue.js)
 6. `identity-access-config` (Keycloak realm/client/policy IaC)
 7. `platform-foundation` (runtime infrastructure and secrets bootstrap)
 

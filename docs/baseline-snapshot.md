@@ -14,7 +14,7 @@ Purpose: quick context re-anchor after long sessions or context compaction.
 3. Node-RED is migration-only (integration or edge glue); no core business logic in Node-RED at V1 GA.
 4. Backend default is Python; MQTT ingestion uses `paho-mqtt`.
 5. Camunda is the workflow engine, with a TypeScript integration layer; business services stay Python.
-6. Operator UI stack is Next.js.
+6. Operator UI stack is Vue.js (Vue 3 + Vite).
 7. IAM/IdP is Keycloak from the beginning.
 8. Vault is in V1 scope and is a go-live blocker.
 9. Observability uses Grafana OSS in V1.
@@ -35,7 +35,7 @@ Purpose: quick context re-anchor after long sessions or context compaction.
 - `reference-api-service`
 - `automation-scenario-service` (Camunda-backed)
 - `channel-policy-router` (API-primary fallback orchestration)
-- `operator-ui` (Next.js)
+- `operator-ui` (Vue.js)
 - `partner-integration-layer` (post-V1)
 
 ## 5) Tenancy and Isolation

@@ -16,7 +16,7 @@ Companion documents:
 
 1. V1 includes all core platform capabilities except partner runtime integrations.
 2. Node-RED is migration-only integration or edge glue and cannot host core logic at V1 GA.
-3. Stack choices are fixed: Python services, `paho-mqtt`, Next.js operator UI, Camunda with TypeScript integration layer, Keycloak IAM, Grafana OSS.
+3. Stack choices are fixed: Python services, `paho-mqtt`, Vue.js (Vue 3 + Vite) operator UI, Camunda with TypeScript integration layer, Keycloak IAM, Grafana OSS.
 4. Vault is mandatory in V1 and blocks first production go-live if missing.
 5. DB-level tenant isolation in PostgreSQL is required in V1.
 6. API path versioning with 90-day overlap and deprecation warnings is required.
@@ -77,7 +77,7 @@ Canonical service boundaries:
 7. `channel-policy-router`
 - Command channel strategy and fallback execution policy (API primary, MQTT optional fallback).
 
-8. `operator-ui` (Next.js)
+8. `operator-ui` (Vue.js)
 - Operational and governance workflows.
 
 9. `partner-integration-layer` (post-V1)

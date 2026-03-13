@@ -38,7 +38,7 @@ contracts, and integration governance.
 4. No core API, domain, or command logic can remain in Node-RED at V1 GA.
 5. Backend default language is Python (`paho-mqtt` for MQTT ingestion).
 6. Workflow orchestration uses Camunda with a TypeScript integration layer.
-7. Operator UI uses Next.js.
+7. Operator UI uses Vue.js (Vue 3 + Vite).
 8. IAM uses Keycloak from the beginning.
 9. Vault is in V1 scope and is a production go-live blocker.
 10. API is primary command channel; MQTT is optional fallback by explicit policy.
