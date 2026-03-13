@@ -73,6 +73,11 @@ Not included in this freeze:
 - Wave 5 user workflow/UI expansion.
 - Post-V1 partner adapters.
 
-## 7. Exit Condition From Freeze
+## 7. Observability Artifacts
+
+- Grafana dashboard template: `docs/observability/channel-policy-router-wave4-dashboard.json`.
+- Import guide: `docs/observability/README.md`.
+
+## 8. Exit Condition From Freeze
 
 Wave 5 work can proceed only when this checkpoint remains green after any Wave 4 bug fix (lint, typecheck, tests, and contract checks).

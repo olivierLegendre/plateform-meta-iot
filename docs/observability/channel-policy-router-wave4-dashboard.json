@@ -1,0 +1,94 @@
+{
+  "title": "Channel Policy Router - Wave 4 SLA & Safety",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "tags": ["wave4", "channel-policy-router", "sla", "safety"],
+  "templating": {
+    "list": [
+      {
+        "name": "site_id",
+        "type": "textbox",
+        "label": "Site Id",
+        "query": "site-1",
+        "current": {
+          "text": "site-1",
+          "value": "site-1"
+        }
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "SLA Breaches (24h)",
+      "gridPos": {"h": 5, "w": 6, "x": 0, "y": 0},
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT COUNT(*)::bigint AS value FROM commands WHERE site_id = '${site_id}' AND status = 'sla_breached' AND updated_at >= now() - interval '24 hour';",
+          "format": "table"
+        }
+      ],
+      "datasource": {"type": "postgres", "uid": "platform-postgres"}
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "SLA Breaches Over Time (15m buckets)",
+      "gridPos": {"h": 8, "w": 12, "x": 6, "y": 0},
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT date_trunc('minute', updated_at) - ((EXTRACT(minute from updated_at)::int % 15) * interval '1 minute') AS time, COUNT(*)::bigint AS breaches FROM commands WHERE site_id = '${site_id}' AND status = 'sla_breached' AND updated_at >= now() - interval '24 hour' GROUP BY 1 ORDER BY 1;",
+          "format": "time_series"
+        }
+      ],
+      "datasource": {"type": "postgres", "uid": "platform-postgres"}
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Reconciliation Latency p50/p95 (seconds)",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 5},
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT date_trunc('hour', reconciled_at) AS time, percentile_cont(0.50) WITHIN GROUP (ORDER BY EXTRACT(EPOCH FROM (reconciled_at - dispatched_at))) AS p50, percentile_cont(0.95) WITHIN GROUP (ORDER BY EXTRACT(EPOCH FROM (reconciled_at - dispatched_at))) AS p95 FROM commands WHERE site_id = '${site_id}' AND reconciled_at IS NOT NULL AND dispatched_at IS NOT NULL AND reconciled_at >= now() - interval '7 day' GROUP BY 1 ORDER BY 1;",
+          "format": "time_series"
+        }
+      ],
+      "datasource": {"type": "postgres", "uid": "platform-postgres"}
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Queue Rejections 503 (1h buckets)",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT date_trunc('hour', created_at) AS time, COUNT(*)::bigint AS rejected_503 FROM commands WHERE site_id = '${site_id}' AND status = 'rejected_queue_saturated' AND created_at >= now() - interval '7 day' GROUP BY 1 ORDER BY 1;",
+          "format": "time_series"
+        }
+      ],
+      "datasource": {"type": "postgres", "uid": "platform-postgres"}
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Incident Hook Delivery Retries",
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 16},
+      "targets": [
+        {
+          "refId": "A",
+          "rawSql": "SELECT date_trunc('hour', created_at) AS time, COUNT(*) FILTER (WHERE attempt_count > 0)::bigint AS retried_events, COUNT(*) FILTER (WHERE delivered_at IS NOT NULL)::bigint AS delivered_events FROM incident_hook_events WHERE created_at >= now() - interval '7 day' GROUP BY 1 ORDER BY 1;",
+          "format": "time_series"
+        }
+      ],
+      "datasource": {"type": "postgres", "uid": "platform-postgres"}
+    }
+  ]
+}
