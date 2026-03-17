@@ -19,21 +19,26 @@ if [[ ! -x "$PYTHON_BIN" ]]; then
 fi
 
 PYTHONPATH="$AUTOMATION_SRC:$CHANNEL_SRC:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
-import base64
-import json
+import os
+from datetime import UTC, datetime, timedelta
 
+import jwt
 from fastapi.testclient import TestClient
+
+JWT_SECRET = "dev-wave6-change-me-32-byte-minimum-key"
+os.environ.setdefault("AUTOMATION_SCENARIO_AUTH_JWT_SECRET", JWT_SECRET)
+os.environ.setdefault("CHANNEL_POLICY_ROUTER_AUTH_JWT_SECRET", JWT_SECRET)
 
 from automation_scenario_service.main import create_app as create_automation_app
 from channel_policy_router.main import create_app as create_channel_app
 
 
 def jwt_for_roles(*roles: str) -> str:
-    header = base64.urlsafe_b64encode(json.dumps({"alg": "none", "typ": "JWT"}).encode()).decode().rstrip("=")
-    payload = base64.urlsafe_b64encode(
-        json.dumps({"realm_access": {"roles": list(roles)}}).encode()
-    ).decode().rstrip("=")
-    return f"{header}.{payload}.sig"
+    payload = {
+        "realm_access": {"roles": list(roles)},
+        "exp": datetime.now(tz=UTC) + timedelta(minutes=15),
+    }
+    return str(jwt.encode(payload, JWT_SECRET, algorithm="HS256"))
 
 
 automation = TestClient(create_automation_app())

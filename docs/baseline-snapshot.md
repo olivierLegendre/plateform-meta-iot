@@ -1,6 +1,6 @@
 # Baseline Snapshot (Single Page)
 
-Last updated: 2026-03-13
+Last updated: 2026-03-17
 Purpose: quick context re-anchor after long sessions or context compaction.
 
 ## 1) Mission
@@ -91,6 +91,7 @@ Purpose: quick context re-anchor after long sessions or context compaction.
 ## 12) Current Delivery Status
 - Wave 4 (Command and Safety Plane) is frozen and validated.
 - Wave 5 functional slice is closed (workflow transitions, UI actions, auth checks, e2e smoke).
+- Wave 6 started for Node-RED retirement and hardening; JWT verification hardening item completed.
 - Evidence: `docs/wave-4-closure-checkpoint.md` and `docs/wave-5-closure-checkpoint.md`.
 - Status source of truth: `docs/target-architecture-and-migration.md` Wave Status Matrix.
 

@@ -86,6 +86,6 @@ Observed: `Wave 5 e2e smoke: PASS`.
 
 ## 5. Open Hardening TODOs (Post-slice)
 
-1. Replace unverified JWT payload parsing with full Keycloak token signature/issuer/audience validation.
+1. [Done 2026-03-17] Replace unverified JWT payload parsing with signature-verified JWT checks (secret + optional issuer/audience) in automation-scenario-service and channel-policy-router.
 2. Persist automation workflow state and audit trail in Postgres.
 3. Add mutation retry/error UX polish and confirmation patterns in operator UI.
