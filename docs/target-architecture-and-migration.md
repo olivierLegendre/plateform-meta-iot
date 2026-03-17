@@ -11,6 +11,7 @@ Companion documents:
 3. Multi-repo setup and governance: `docs/multi-repo-operating-model.md`
 4. Fast context anchor: `docs/baseline-snapshot.md`
 5. Wave 4 closure evidence: `docs/wave-4-closure-checkpoint.md`
+6. Wave 5 closure evidence: `docs/wave-5-closure-checkpoint.md`
 
 ## 0. Locked Decisions Snapshot
 
@@ -112,7 +113,7 @@ Execution rules:
 | 2 | `reference-api-service` Extraction | completed | Service scaffold and API contract/testing baseline delivered. |
 | 3 | `device-ingestion-service` Extraction | completed | MQTT ingestion and persistence baseline delivered. |
 | 4 | Command And Safety Plane | completed | Frozen on 2026-03-13; see docs/wave-4-closure-checkpoint.md. |
-| 5 | Automation And Operator UI Decoupling | in_progress | Automation service scaffold and operator-ui route scaffold delivered; integration hardening pending. |
+| 5 | Automation And Operator UI Decoupling | completed | Closed on 2026-03-17 for workflow+UI+auth+e2e slice; see docs/wave-5-closure-checkpoint.md. |
 | 6 | Node-RED Retirement And Hardening | pending | Depends on Wave 5 completion and migration validation. |
 | 7 | Partner Integration Rollout (Post-V1) | pending | Deferred by decision; Schneider BACnet first. |
 

@@ -90,8 +90,8 @@ Purpose: quick context re-anchor after long sessions or context compaction.
 
 ## 12) Current Delivery Status
 - Wave 4 (Command and Safety Plane) is frozen and validated.
-- Wave 5 is in progress (automation service scaffold + operator-ui route scaffold done; integration hardening pending).
-- Evidence: `docs/wave-4-closure-checkpoint.md`.
+- Wave 5 functional slice is closed (workflow transitions, UI actions, auth checks, e2e smoke).
+- Evidence: `docs/wave-4-closure-checkpoint.md` and `docs/wave-5-closure-checkpoint.md`.
 - Status source of truth: `docs/target-architecture-and-migration.md` Wave Status Matrix.
 
 ## 13) How To Use This File

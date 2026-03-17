@@ -12,6 +12,7 @@ Companion documents:
 4. Target migration waves: `docs/target-architecture-and-migration.md`
 5. Fast context anchor: `docs/baseline-snapshot.md`
 6. Wave 4 closure checkpoint: `docs/wave-4-closure-checkpoint.md`
+7. Wave 5 closure checkpoint: `docs/wave-5-closure-checkpoint.md`
 
 ## 1. Mission
 
