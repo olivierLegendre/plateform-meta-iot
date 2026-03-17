@@ -114,7 +114,7 @@ Execution rules:
 | 3 | `device-ingestion-service` Extraction | completed | MQTT ingestion and persistence baseline delivered. |
 | 4 | Command And Safety Plane | completed | Frozen on 2026-03-13; see docs/wave-4-closure-checkpoint.md. |
 | 5 | Automation And Operator UI Decoupling | completed | Closed on 2026-03-17 for workflow+UI+auth+e2e slice; see docs/wave-5-closure-checkpoint.md. |
-| 6 | Node-RED Retirement And Hardening | in_progress | Started 2026-03-17; auth hardening item #1 complete, Node-RED decommission inventory in progress (see docs/wave-6-kickoff-checkpoint.md). |
+| 6 | Node-RED Retirement And Hardening | in_progress | Started 2026-03-17; auth hardening item #1 complete, PoC Node-RED decommission inventory recorded (see docs/wave-6-kickoff-checkpoint.md). |
 | 7 | Partner Integration Rollout (Post-V1) | pending | Deferred by decision; Schneider BACnet first. |
 
 
