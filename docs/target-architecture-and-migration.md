@@ -12,6 +12,11 @@ Companion documents:
 4. Fast context anchor: `docs/baseline-snapshot.md`
 5. Wave 4 closure evidence: `docs/wave-4-closure-checkpoint.md`
 6. Wave 5 closure evidence: `docs/wave-5-closure-checkpoint.md`
+7. Forward alignment guardrails: `docs/wave-forward-alignment-audit.md`
+8. Container image/tag governance: `docs/container-image-tagging-policy.md`
+9. Wave 7 kickoff checkpoint: `docs/wave-7-kickoff-checkpoint.md`
+10. Wave 7 execution backlog: `docs/wave-7-execution-backlog.md`
+11. Wave 7 Schneider BACnet contract freeze: `docs/wave-7-schneider-bacnet-contract.md`
 
 ## 0. Locked Decisions Snapshot
 
@@ -114,8 +119,8 @@ Execution rules:
 | 3 | `device-ingestion-service` Extraction | completed | MQTT ingestion and persistence baseline delivered. |
 | 4 | Command And Safety Plane | completed | Frozen on 2026-03-13; see docs/wave-4-closure-checkpoint.md. |
 | 5 | Automation And Operator UI Decoupling | completed | Closed on 2026-03-17 for workflow+UI+auth+e2e slice; see docs/wave-5-closure-checkpoint.md. |
-| 6 | Node-RED Retirement And Hardening | in_progress | Started 2026-03-17; auth hardening item #1 complete, PoC Node-RED decommission inventory recorded (see docs/wave-6-kickoff-checkpoint.md). |
-| 7 | Partner Integration Rollout (Post-V1) | pending | Deferred by decision; Schneider BACnet first. |
+| 6 | Node-RED Retirement And Hardening | completed | Closed on 2026-03-18; see docs/wave-6-closure-signoff.md. |
+| 7 | Partner Integration Rollout (Post-V1) | in_progress | Started 2026-03-18; Schneider BACnet first, tracked in docs/wave-7-kickoff-checkpoint.md and docs/wave-7-execution-backlog.md. |
 
 
 ## Wave 0: Contract And Boundary Freeze
@@ -283,12 +288,16 @@ Deliverables:
 1. Explicit list of remaining Node-RED flows and decommission decisions.
 2. Runbooks for incident, rollback, and recovery per service.
 3. SLO dashboards and alerting active for ingestion/API/command paths.
+4. Execution backlog tracked in `docs/wave-6-execution-backlog.md`.
+5. Baseline GHCR image publish workflows exist for all deployable service repos.
 
 Acceptance criteria:
 
 1. No critical business rule depends on Node-RED state.
 2. Remaining Node-RED role is bridge-only or fully retired by decision.
 3. Operational readiness checklist is green.
+4. Pipeline-ready service images are published and pullable for deployment manifests.
+5. Deferred image hardening items are explicitly tracked as post-baseline TODOs.
 
 Rollback:
 
