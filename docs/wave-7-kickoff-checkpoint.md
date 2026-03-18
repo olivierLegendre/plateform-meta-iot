@@ -38,6 +38,48 @@ Primary outcomes:
 2. Enforce policy that adapters do not bypass platform IAM, audit, command serialization, or tenant isolation controls.
 3. Deliver integration verification baseline (contract + isolation + rollback).
 
+## 4.1 W7-02 Schneider Adapter Runtime Skeleton (Started)
+
+Seeded repository:
+- `partner-integration-layer`
+
+Implemented baseline artifacts:
+- `partner-integration-layer/src/partner_integration_layer/main.py`
+- `partner-integration-layer/src/partner_integration_layer/adapters/inbound/http/router.py`
+- `partner-integration-layer/src/partner_integration_layer/application/translator.py`
+- `partner-integration-layer/src/partner_integration_layer/domain/models.py`
+- `partner-integration-layer/tests/test_api.py`
+- `partner-integration-layer/scripts/setup_dev.sh`
+- `partner-integration-layer/scripts/export_openapi.py`
+- `partner-integration-layer/.github/workflows/ci.yml`
+- `partner-integration-layer/.github/workflows/image-publish.yml`
+
+Baseline behavior:
+1. health endpoint and versioned Schneider adapter endpoints are available;
+2. telemetry normalization route maps BACnet input into canonical payload baseline fields;
+3. command intent route declares governance handoff path to platform command plane;
+4. CI/image workflow scaffolds exist for repeatable integration delivery.
+
+Current interpretation: W7-02 is now started with an executable adapter skeleton. Remaining work is wiring real BACnet runtime integration and enforcing full security/tenancy controls (`W7-03`).
+
+## 4.2 W7-03 Security And Tenancy Enforcement (Implemented Baseline)
+
+Implemented in `partner-integration-layer`:
+- adapter token enforcement for Schneider endpoints (`X-Adapter-Token`);
+- tenant scope header enforcement (`X-Organization-Id`, `X-Site-Id`);
+- payload/header scope consistency checks (reject mismatch).
+
+Code references:
+- `partner-integration-layer/src/partner_integration_layer/settings.py`
+- `partner-integration-layer/src/partner_integration_layer/adapters/inbound/http/router.py`
+- `partner-integration-layer/tests/test_api.py`
+
+Validation:
+1. local adapter test suite: `5 passed`;
+2. reject-path coverage includes invalid token and tenant scope mismatch.
+
+Current interpretation: W7-03 baseline controls are in place for adapter auth and tenant scoping. Remaining W7-03 work is integrating real IAM token validation path with `identity-access-config`.
+
 ## 5. Guardrails (Non-negotiable)
 
 1. Adapter components remain transport/integration adapters only (no core business rule ownership).

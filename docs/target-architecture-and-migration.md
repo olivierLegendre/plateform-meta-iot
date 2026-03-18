@@ -120,7 +120,7 @@ Execution rules:
 | 4 | Command And Safety Plane | completed | Frozen on 2026-03-13; see docs/wave-4-closure-checkpoint.md. |
 | 5 | Automation And Operator UI Decoupling | completed | Closed on 2026-03-17 for workflow+UI+auth+e2e slice; see docs/wave-5-closure-checkpoint.md. |
 | 6 | Node-RED Retirement And Hardening | completed | Closed on 2026-03-18; see docs/wave-6-closure-signoff.md. |
-| 7 | Partner Integration Rollout (Post-V1) | in_progress | Started 2026-03-18; Schneider BACnet first, tracked in docs/wave-7-kickoff-checkpoint.md and docs/wave-7-execution-backlog.md. |
+| 7 | Partner Integration Rollout (Post-V1) | in_progress | Started 2026-03-18; Schneider BACnet first, W7-01 contract freeze and W7-02 runtime scaffold started (see docs/wave-7-kickoff-checkpoint.md and docs/wave-7-execution-backlog.md). |
 
 
 ## Wave 0: Contract And Boundary Freeze
