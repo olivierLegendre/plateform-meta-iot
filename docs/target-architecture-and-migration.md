@@ -23,6 +23,7 @@ Companion documents:
 15. Wave 7 closure sign-off: `docs/wave-7-closure-signoff.md`
 16. Wave 8 kickoff checkpoint: `docs/wave-8-kickoff-checkpoint.md`
 17. Wave 8 execution backlog: `docs/wave-8-execution-backlog.md`
+18. Wave 8 closure sign-off: `docs/wave-8-closure-signoff.md`
 
 ## 0. Locked Decisions Snapshot
 
@@ -126,8 +127,8 @@ Execution rules:
 | 4 | Command And Safety Plane | completed | Frozen on 2026-03-13; see docs/wave-4-closure-checkpoint.md. |
 | 5 | Automation And Operator UI Decoupling | completed | Closed on 2026-03-17 for workflow+UI+auth+e2e slice; see docs/wave-5-closure-checkpoint.md. |
 | 6 | Node-RED Retirement And Hardening | completed | Closed on 2026-03-18; see docs/wave-6-closure-signoff.md. |
-| 7 | Partner Integration Rollout (Post-V1) | in_progress | Started 2026-03-18; Schneider BACnet first, W7-01 contract freeze and W7-02 runtime scaffold started (see docs/wave-7-kickoff-checkpoint.md and docs/wave-7-execution-backlog.md). |
-| 8 | Production Hardening And Org Migration | pending | Prepared on 2026-03-18; starts only after Wave 7 closure (see docs/wave-8-kickoff-checkpoint.md and docs/wave-8-execution-backlog.md). |
+| 7 | Partner Integration Rollout (Post-V1) | completed | Closed and approved on 2026-03-18; see docs/wave-7-closure-signoff.md. |
+| 8 | Production Hardening And Org Migration | completed | Closed on 2026-03-18; hardened image pipeline baseline, namespace normalization (`ghcr.io/olivierlegendre`), and `v0.2.0` pullability/readiness evidence are recorded (see docs/wave-8-closure-signoff.md). |
 
 
 ## Wave 0: Contract And Boundary Freeze
@@ -343,7 +344,7 @@ Deliverables:
 1. Image provenance/SBOM attestation and verification gate in CI.
 2. Vulnerability scanning policy gate with agreed fail thresholds.
 3. OIDC least-privilege publish identity for image pipelines.
-4. Registry namespace migration from `ghcr.io/olivierlegendre/...` to `ghcr.io/ramery/...`.
+4. Registry namespace/casing normalization and enforcement on `ghcr.io/olivierlegendre/...`.
 5. Updated deployment manifests, release gates, and runtime credential validation after migration.
 
 Acceptance criteria:
@@ -351,7 +352,7 @@ Acceptance criteria:
 1. All service image pipelines publish attestations and pass verification checks.
 2. Security scan gate blocks release on configured high/critical findings.
 3. No PAT-based publish flow remains in release pipelines (OIDC only).
-4. Production manifests and pullability proofs are green against `ghcr.io/ramery/...`.
+4. Production manifests and pullability proofs are green against `ghcr.io/olivierlegendre/...`.
 5. Rollback path to previous trusted image set is documented and tested.
 
 Rollback:

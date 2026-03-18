@@ -104,13 +104,12 @@ env PYTHONPATH=src python scripts/run_wave7_scale_baseline.py \
 
 | Role | Owner | Decision | Date | Evidence link/note |
 | --- | --- | --- | --- | --- |
-| Platform architecture | olivier | pending | 2026-03-18 | Review this sign-off record and Wave 7 checkpoint references |
-| Platform foundation operations | olivier | pending | 2026-03-18 | Validate observability verifier + alert wiring artifacts |
-| Partner integration service owner | olivier | pending | 2026-03-18 | Validate adapter load/integration reports and runbooks |
+| Platform architecture | olivier | approved | 2026-03-18 | Wave 7 closure evidence bundle reviewed and accepted |
+| Platform foundation operations | olivier | approved | 2026-03-18 | Observability + load/integration evidence verified |
+| Partner integration service owner | olivier | approved | 2026-03-18 | Adapter runtime, tests, and runbooks accepted |
 
 Final closure decision:
 - Wave 7 status: `Closed`
 - Approved by: `olivier`
-- Approval date: `18/03/2026`
-- Notes: Technical evidence bundle is assembled; closure flips to `Closed` after owner approvals are recorded.
-
+- Approval date: `2026-03-18`
+- Notes: Closure confirmed; Wave 8 entry criteria are met.

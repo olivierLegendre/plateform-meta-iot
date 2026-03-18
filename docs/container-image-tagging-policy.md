@@ -2,7 +2,7 @@
 
 Date: 2026-03-18
 Owner: Platform Architecture
-Registry org (temporary): `olivierlegendre`
+Registry org (current): `olivierlegendre`
 
 ## 1. Purpose
 
@@ -10,8 +10,6 @@ Define canonical container image naming and tag rules for all deployable service
 This policy applies to production manifests and release gates.
 
 ## 2. Registry and visibility
-
-TODO (post-development migration): create GitHub organization `ramery`, migrate images from `ghcr.io/olivierlegendre/...` to `ghcr.io/ramery/...`, and update manifests/policies accordingly.
 
 1. Registry: `ghcr.io`
 2. Organization namespace (current): `olivierlegendre`
@@ -56,11 +54,11 @@ Before declaring a wave production-ready:
 4. topology and readiness gates are green;
 5. owner signoff is recorded.
 
-## 7. Deferred Hardening TODOs (Post-Baseline)
+## 7. Wave 8 Hardening Controls
 
-These items are explicitly deferred and do not block baseline Wave 6 "pipeline-ready image" closure:
+Wave 8 activates the following controls as required release gates:
 
-1. Add signed provenance/SBOM attestation workflow and verification gate.
-2. Add vulnerability scanning policy gate with agreed severity thresholds.
-3. Migrate publish identity to OIDC least-privilege pattern.
-4. Migrate image namespace from `ghcr.io/olivierlegendre/...` to `ghcr.io/ramery/...`.
+1. Signed provenance/SBOM generation and verification in CI.
+2. Vulnerability scanning gate with agreed severity thresholds.
+3. OIDC-backed publish/sign identity (no PAT release path).
+4. Namespace set to `ghcr.io/olivierlegendre/...` across workflows and deployment manifests.
