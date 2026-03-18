@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "finding_count": 0,
+  "findings": [],
+  "generated_at": "2026-03-18T14:13:47.277475+00:00",
+  "checks": {
+    "reference_api": {
+      "status": "PASS",
+      "command": "cd /home/olivier/work/iot_services/reference-api-service && ./scripts/run_postgres_integration_tests.sh",
+      "output_tail": "Network reference-api-service_default Creating \n Network reference-api-service_default Created \n Container reference-api-postgres Creating \n Container reference-api-postgres Created \n Container reference-api-postgres Starting \n Container reference-api-postgres Started \n..                                                                       [100%]\n2 passed, 10 deselected in 0.33s"
+    },
+    "device_ingestion": {
+      "status": "PASS",
+      "command": "cd /home/olivier/work/iot_services/device-ingestion-service && ./scripts/run_postgres_integration_tests.sh",
+      "output_tail": "Network device-ingestion-service_default Creating \n Network device-ingestion-service_default Created \n Container device-ingestion-postgres Creating \n Container device-ingestion-postgres Created \n Container device-ingestion-postgres Starting \n Container device-ingestion-postgres Started \n..                                                                       [100%]\n2 passed, 8 deselected in 0.16s"
+    },
+    "channel_policy_router": {
+      "status": "PASS",
+      "command": "cd /home/olivier/work/iot_services/channel-policy-router && ./scripts/run_postgres_integration_tests.sh",
+      "output_tail": "Network channel-policy-router_default Creating \n Network channel-policy-router_default Created \n Container channel-policy-router-postgres Creating \n Container channel-policy-router-postgres Created \n Container channel-policy-router-postgres Starting \n Container channel-policy-router-postgres Started \n..                                                                       [100%]\n2 passed, 20 deselected in 0.20s"
+    },
+    "automation_scenario": {
+      "status": "PASS",
+      "command": "cd /home/olivier/work/iot_services/automation-scenario-service && source .venv/bin/activate && pytest -q tests/test_api_smoke.py::test_list_runs_is_site_scoped",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.41s"
+    }
+  }
+}

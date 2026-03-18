@@ -24,6 +24,10 @@ Companion documents:
 16. Wave 8 kickoff checkpoint: `docs/wave-8-kickoff-checkpoint.md`
 17. Wave 8 execution backlog: `docs/wave-8-execution-backlog.md`
 18. Wave 8 closure sign-off: `docs/wave-8-closure-signoff.md`
+19. Wave 1 restart kickoff checkpoint: `docs/wave-1-kickoff-checkpoint.md`
+20. Wave 1 execution backlog: `docs/wave-1-execution-backlog.md`
+21. Wave 1 security baseline traceability: `docs/wave-1-security-baseline-traceability.md`
+22. Wave 1 closure sign-off: `docs/wave-1-closure-signoff.md`
 
 ## 0. Locked Decisions Snapshot
 
@@ -121,7 +125,7 @@ Execution rules:
 | Wave | Name | Status | Notes |
 | --- | --- | --- | --- |
 | 0 | Contract And Boundary Freeze | completed | Core governance docs and BDD baseline in place. |
-| 1 | Foundation And Security Baseline | pending | Platform foundation hardening not yet fully implemented. |
+| 1 | Foundation And Security Baseline | completed | Closed on 2026-03-18 with Keycloak baseline, Vault runtime baseline, tenant-isolation evidence, observability baseline, and closure sign-off recorded (see docs/wave-1-closure-signoff.md). |
 | 2 | `reference-api-service` Extraction | completed | Service scaffold and API contract/testing baseline delivered. |
 | 3 | `device-ingestion-service` Extraction | completed | MQTT ingestion and persistence baseline delivered. |
 | 4 | Command And Safety Plane | completed | Frozen on 2026-03-13; see docs/wave-4-closure-checkpoint.md. |
