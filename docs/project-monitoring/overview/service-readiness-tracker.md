@@ -2,10 +2,10 @@
 
 > AUTHORITATIVE (EXECUTION): This document is part of the project-monitoring baseline and is authoritative for implementation status, blockers, and evidence tracking.
 
-Date: 2026-04-03
+Date: 2026-04-14
 Owner: Platform team
 Purpose: track readiness closure work service-by-service until production gates are met.
-Last verification cycle: 2026-04-03 (full local checks)
+Last verification cycle: 2026-04-14 (`platform-foundation` closure pass)
 
 Status legend:
 - `not_started`
@@ -17,7 +17,7 @@ Status legend:
 
 | Service | Readiness | Why | Items total | Items done | Progress |
 | --- | --- | --- | ---: | ---: | ---: |
-| `platform-foundation` | Partial | Strong baseline with Wave 1/Wave 6/Wave 8 local gates now passing via repo `.venv`; clean-state, DB ownership rollout, and backup/restore TODO closure remain open. | 4 | 0 | 0% |
+| `platform-foundation` | Partial | Wave 1/Wave 6/Wave 8 gates are PASS with fresh evidence, shared Postgres ownership tracking is in place, and repo clean-state is confirmed. Remaining open item: production TODO placeholder closure in manifest policy flow. | 4 | 3 | 75% |
 | `identity-access-config` | Partial | Keycloak baseline scripts validated locally, but CI drift control and non-dev import evidence remain open. | 3 | 0 | 0% |
 | `reference-api-service` | Partial (near Ready) | Local quality gates pass (lint/typecheck/tests), production evidence still missing. | 3 | 0 | 0% |
 | `device-ingestion-service` | Partial (near Ready) | Local quality gates pass (lint/typecheck/tests), production load evidence still missing. | 3 | 0 | 0% |
@@ -30,17 +30,17 @@ Status legend:
 
 ### 2.1 `platform-foundation`
 
-- [ ] Clean git state in foundation scripts/reports.
-- [ ] Re-run Wave 8 readiness/pullability and archive fresh PASS artifacts.
+- [x] Clean git state in foundation scripts/reports.
+- [x] Re-run Wave 8 readiness/pullability and archive fresh PASS artifacts.
 - [ ] Remove/close remaining production TODO placeholders in manifest policy flow.
-- [ ] Define and track backup/restore implementation for shared PostgreSQL operations.
+- [x] Define and track backup/restore implementation for shared PostgreSQL operations.
 
 | Task | Status | Owner | Target date | Evidence link | Notes |
 | --- | --- | --- | --- | --- | --- |
-| Clean git state in foundation scripts/reports | blocked | Platform team | TBD | `git -C /home/olivier/work/iot_services/platform-foundation status --short` | Modified files are still present in deploy/observability/nodered scripts and reports. |
-| Re-run Wave 8 readiness/pullability and archive fresh PASS artifacts | in_progress | Platform team | TBD | `platform-foundation/deploy/production/scripts/run_wave8_namespace_readiness.sh` | Re-run completed with `status=PASS`; artifacts refreshed in `deploy/production/reports/` and `nodered/reports/`. Final archive/sign-off step still open. |
-| Remove/close remaining production TODO placeholders in manifest policy flow | not_started | Platform team | TBD | TBD | Not re-audited in this cycle. |
-| Define and track backup/restore implementation for shared PostgreSQL operations | not_started | Platform team | TBD | `platform-foundation/deploy/production/runbooks/postgres-backup-restore.md` | Ownership is foundation-side; implementation is deferred from V1 delivery but must stay tracked. |
+| Clean git state in foundation scripts/reports | done | Platform team | 2026-04-14 | `git -C /home/olivier/work/iot_services/platform-foundation status --short` | Verified clean working tree on this cycle (no pending changes). |
+| Re-run Wave 8 readiness/pullability and archive fresh PASS artifacts | done | Platform team | 2026-04-14 | `platform-foundation/deploy/production/scripts/run_wave8_namespace_readiness.sh` | Re-run executed on 2026-04-14 with `status=PASS`; reports refreshed under `deploy/production/reports/` and `nodered/reports/`. |
+| Remove/close remaining production TODO placeholders in manifest policy flow | in_progress | Platform team | TBD | `platform-foundation/deploy/production/README.md` | Open TODO/placeholder markers remain in deployment docs; requires closure or explicit deferred policy with owner/date. |
+| Define and track backup/restore implementation for shared PostgreSQL operations | done | Platform team | 2026-04-14 | `platform-foundation/deploy/production/runbooks/postgres-backup-restore.md`; `docs/project-monitoring/services/platform-foundation/postgresql-shared-cluster-rollout.md` | Ownership, scope, and TODO checklist are documented and linked in execution tracking. |
 
 ### 2.2 `identity-access-config`
 
@@ -148,7 +148,7 @@ Execution rule:
 1. No service can be declared `Ready` if it leaves an acceptance-critical PoC capability untracked.
 2. Any PoC parity gap must be mapped to an explicit task row with owner + target date + evidence.
 
-## 4. Verification Snapshot (2026-04-03)
+## 4. Verification Snapshot (2026-04-03 baseline + 2026-04-14 platform-foundation refresh)
 
 Executed checks:
 
@@ -159,7 +159,7 @@ Executed checks:
 5. `automation-scenario-service`: `ruff` PASS, `mypy` PASS, `pytest` PASS.
 6. `operator-ui`: `npm run typecheck` PASS, `npm run build` PASS.
 7. `partner-integration-layer`: `ruff` PASS, `mypy` PASS, `pytest` PASS.
-8. `platform-foundation`: vault runtime baseline PASS; observability baseline PASS; Wave 6 topology release gate PASS; Wave 8 namespace readiness PASS. Script runners now auto-resolve Python via `PYTHON_BIN` -> repo `.venv/bin/python` -> `python3`.
+8. `platform-foundation`: vault runtime baseline PASS; observability baseline PASS; Wave 6 topology release gate PASS; Wave 8 namespace readiness PASS. Wave 8 readiness/pullability was re-run on 2026-04-14 with `status=PASS`. Script runners now auto-resolve Python via `PYTHON_BIN` -> repo `.venv/bin/python` -> `python3`.
 9. `plateform-meta-iot`: Wave 1 tenant isolation checks PASS; Wave 6 runbook verification PASS.
 
 ## 5. Update Rules
