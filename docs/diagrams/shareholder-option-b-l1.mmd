@@ -1,0 +1,75 @@
+flowchart LR
+  subgraph FIELD[Terrain]
+    IOT[IoT sans fil\nLoRaWAN Zigbee Z-Wave ROADMAP]
+    G1[Gateway / Coordinator]
+    BMS[Equipements BMS\nBACnet Modbus KNX]
+    E1[Point d entree batiment\nAS-P PXC ou equivalent]
+  end
+
+  subgraph PART[Partenaires automation]
+    S1[Schneider]
+    S2[Siemens]
+    S3[Legrand ROADMAP]
+    S4[Autres ROADMAP]
+  end
+
+  subgraph CORE[Plateforme]
+    U1[operator-ui]
+    U2[identity-access-config]
+    U3[device-ingestion-service]
+    U4[reference-api-service]
+    U5[channel-policy-router]
+    U6[automation-scenario-service]
+    U7[partner-integration-layer]
+    U8[platform-foundation]
+  end
+
+  subgraph NFR[Garde-fous non fonctionnels]
+    N1[Securite IAM]
+    N2[Tracabilite et audit]
+    N3[Resilience]
+    N4[Observabilite]
+    N5[Scalabilite multi-sites]
+  end
+
+  subgraph DT[Digital Twin]
+    D1[Tandem Connect]
+    D2[Tandem]
+    D3[Scope actuel: telemetrie et contexte uniquement]
+  end
+
+  IOT --> G1
+  G1 -->|MQTT| U8
+  U8 --> U3
+  U3 --> U4
+
+  BMS --> E1
+  E1 -->|BACnet Modbus KNX via adapters| U7
+  S1 --> U7
+  S2 --> U7
+  S3 --> U7
+  S4 --> U7
+  U7 --> U4
+
+  U1 --> U4
+  U6 --> U5
+  U4 --> U5
+  U5 -->|writes gouvernes obligatoires| U7
+  U7 --> E1
+
+  U4 --> D1
+  U7 --> D1
+  D1 --> D2
+  D3 --- D1
+
+  U2 --> U1
+  U2 --> U4
+  U2 --> U5
+  U2 --> U6
+  U2 --> U7
+
+  U8 --- N1
+  U8 --- N2
+  U8 --- N3
+  U8 --- N4
+  U8 --- N5

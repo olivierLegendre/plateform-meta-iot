@@ -1,0 +1,28 @@
+<mxfile host="app.diagrams.net" agent="codex" version="24.7.17" type="device">
+  <diagram id="optBL1" name="Option-B-L1">
+    <mxGraphModel dx="1900" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="10" value="Terrain IoT&lt;br&gt;LoRaWAN / Zigbee / Z-Wave (roadmap)&lt;br&gt;Gateway / Coordinator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF7EE;strokeColor=#2E7D32;fontColor=#102A12;" vertex="1" parent="1"><mxGeometry x="30" y="80" width="300" height="130" as="geometry"/></mxCell>
+        <mxCell id="11" value="Terrain BMS&lt;br&gt;BACnet / Modbus / KNX&lt;br&gt;Point d'entree batiment: AS-P / PXC / equivalent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF7EE;strokeColor=#2E7D32;fontColor=#102A12;" vertex="1" parent="1"><mxGeometry x="30" y="260" width="300" height="150" as="geometry"/></mxCell>
+
+        <mxCell id="20" value="Partenaires&lt;br&gt;Schneider&lt;br&gt;Siemens&lt;br&gt;Legrand roadmap&lt;br&gt;Autres roadmap" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E6;strokeColor=#B26A00;fontColor=#4A2A00;" vertex="1" parent="1"><mxGeometry x="370" y="80" width="240" height="190" as="geometry"/></mxCell>
+
+        <mxCell id="30" value="Plateforme&lt;br&gt;operator-ui&lt;br&gt;identity-access-config&lt;br&gt;device-ingestion-service&lt;br&gt;reference-api-service&lt;br&gt;channel-policy-router&lt;br&gt;automation-scenario-service&lt;br&gt;partner-integration-layer&lt;br&gt;platform-foundation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FF;strokeColor=#1F4E79;fontColor=#0B1F33;" vertex="1" parent="1"><mxGeometry x="650" y="60" width="420" height="420" as="geometry"/></mxCell>
+
+        <mxCell id="40" value="Digital Twin&lt;br&gt;Tandem Connect + Tandem&lt;br&gt;Scope actuel: telemetrie + contexte" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E6;strokeColor=#B26A00;fontColor=#4A2A00;" vertex="1" parent="1"><mxGeometry x="1120" y="140" width="300" height="140" as="geometry"/></mxCell>
+
+        <mxCell id="50" value="Garde-fous NFR&lt;br&gt;IAM&lt;br&gt;Tracabilite/Audit&lt;br&gt;Resilience/Observabilite&lt;br&gt;Scalabilite multi-sites" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#6B8FB3;fontColor=#0B1F33;" vertex="1" parent="1"><mxGeometry x="1120" y="320" width="300" height="160" as="geometry"/></mxCell>
+
+        <mxCell id="100" value="MQTT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="10" target="30"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="101" value="BACnet/Modbus/KNX" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="11" target="30"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#B26A00;endArrow=block;endFill=1;" edge="1" parent="1" source="20" target="30"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="103" value="Sync" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#B26A00;endArrow=block;endFill=1;" edge="1" parent="1" source="30" target="40"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="104" value="Writes gouvernes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#CC0000;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="30" target="11"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6B8FB3;endArrow=block;endFill=1;" edge="1" parent="1" source="50" target="30"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

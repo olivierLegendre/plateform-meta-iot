@@ -1,0 +1,116 @@
+flowchart LR
+
+subgraph LEG[Legende]
+  L1[IN SCOPE 2026]
+  L2[ROADMAP]
+  L3[Ecritures: gouvernance centrale obligatoire]
+  L4[Digital Twin: sync telemetrie/contexte uniquement]
+end
+
+subgraph NEEDS[Besoins actionnaires]
+  N1[Unifier IoT sans fil et BMS filaire]
+  N2[Assurer gouvernance centrale des commandes]
+  N3[Rester ouvert a Schneider, Siemens, Legrand, autres]
+  N4[Activer un jumeau numerique sans perdre la maitrise]
+end
+
+subgraph IOT[Terrain IoT sans fil]
+  I1[Objets LoRaWAN]
+  I2[Objets Zigbee]
+  I3[Objets Z-Wave ROADMAP]
+  I4[Gateway / Coordinator]
+end
+
+subgraph BMS[BMS filaire]
+  B0[Point d entree unique batiment\nServeur automation partenaire]
+  B1[Equipements BACnet]
+  B2[Equipements Modbus]
+  B3[Equipements KNX]
+  B4[Passerelles protocolaires\nsi necessaire]
+  B5[Exemples: AS-P, PXC, equivalents futurs]
+end
+
+subgraph INTEG[Responsabilite integrateur BMS]
+  R1[Commissioning site]
+  R2[Mapping points et adresses]
+  R3[Topologie OT et securite locale]
+  R4[Configuration passerelles et bus terrain]
+  R5[Tests terrain et acceptance locale]
+end
+
+subgraph PLAT[Responsabilite plateforme]
+  P0[operator-ui]
+  P1[identity-access-config]
+  P2[device-ingestion-service]
+  P3[reference-api-service]
+  P4[channel-policy-router]
+  P5[automation-scenario-service]
+  P6[partner-integration-layer]
+  P7[platform-foundation]
+end
+
+subgraph NFR[Garde-fous non fonctionnels]
+  F1[Securite IAM + politiques]
+  F2[Audit et tracabilite]
+  F3[Resilience et supervision]
+  F4[Scalabilite multi-sites]
+end
+
+subgraph TWIN[Digital Twin]
+  T1[Autodesk Tandem]
+  T2[Tandem Connect]
+  T3[Sync telemetrie et contexte IN SCOPE]
+  T4[Ecritures depuis Twin HORS SCOPE]
+end
+
+N1 --> IOT
+N1 --> BMS
+N2 --> P4
+N3 --> P6
+N4 --> TWIN
+
+I1 --> I4
+I2 --> I4
+I3 --> I4
+I4 -->|MQTT| P7
+P7 --> P2
+P2 --> P3
+
+B1 --> B0
+B2 --> B0
+B3 --> B4
+B4 --> B0
+B5 --> B0
+B0 -->|BACnet Modbus KNX via adapters| P6
+P6 --> P3
+
+P0 --> P3
+P5 --> P4
+P3 --> P4
+P4 -->|seules ecritures autorisees| P6
+P6 -->|commande gouvernee| B0
+
+P1 --> P0
+P1 --> P3
+P1 --> P4
+P1 --> P5
+P1 --> P6
+
+P7 --- F1
+P7 --- F2
+P7 --- F3
+P7 --- F4
+P4 --- F1
+P4 --- F2
+
+P3 -->|API telemetrie contexte| T2
+P6 -->|mapping partenaires| T2
+T2 --> T1
+T4 -.non actif.-> P4
+
+INTEG -.configure et valide.-> B0
+INTEG -.configure et valide.-> B4
+INTEG -.prerequis OT.-> P6
+
+L3 --> P4
+L4 --> T3

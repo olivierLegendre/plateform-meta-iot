@@ -33,3 +33,10 @@
 - Prefer simple, readable solutions first.
 - Use advanced patterns only when justified by reuse/change frequency.
 - Explain non-standard design choices in PR notes.
+
+## Documentation Authority Model
+
+- Treat `docs/specs/` as authoritative source of truth.
+- Treat `docs/reports/` as informative outputs and research artifacts.
+- If a report conflicts with a spec, follow and preserve the spec.
+- Keep internal references aligned with this split when creating or moving documents.

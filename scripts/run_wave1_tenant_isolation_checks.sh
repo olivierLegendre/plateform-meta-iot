@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WORKSPACE_DIR="$(cd "$ROOT_DIR/.." && pwd)"
-REPORT_PATH="${REPORT_PATH:-$ROOT_DIR/docs/wave-1-tenant-isolation-report.json}"
+REPORT_PATH="${REPORT_PATH:-$ROOT_DIR/docs/reports/wave/wave-1-tenant-isolation-report.json}"
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 

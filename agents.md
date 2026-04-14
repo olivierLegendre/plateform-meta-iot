@@ -95,7 +95,9 @@ See [agents/testing.md](./agents/testing.md) for details.
 ## Specialized Topics
 
 - Load [agents/project.md](./agents/project.md) on every task only if it is populated with project-specific rules.
+- Load [agents/project-monitoring.md](./agents/project-monitoring.md) for tasks mentioning readiness tracking, wave planning, execution follow-up, blockers, or project monitoring structure.
 - Load [agents/english.md](./agents/english.md) on every task.
+- Load [agents/presentation.md](./agents/presentation.md) for tasks mentioning presentations, reports, executive summaries, stakeholder briefings, or PDF/DOCX export.
 - Load [agents/backend.md](./agents/backend.md) for tasks mentioning backend APIs, services, workers, or data layers.
 - Load [agents/security.md](./agents/security.md) for tasks mentioning auth, secrets, privacy, encryption, vulnerabilities, or sensitive data.
 - Load [agents/testing.md](./agents/testing.md) for tasks mentioning tests, coverage, or test refactors.

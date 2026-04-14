@@ -1,0 +1,12 @@
+flowchart LR
+  A[IoT sans fil\nLoRaWAN Zigbee Z-Wave roadmap] --> G[Gateway Coordinator]
+  G -->|MQTT| P[Plateforme\nServices coeur + gouvernance]
+
+  B[Equipements BMS\nBACnet Modbus KNX] --> E[Point d entree batiment\nAS-P PXC equivalent]
+  E -->|Adapters| P
+
+  P -->|Ecritures gouvernees| E
+  P -->|Sync telemetrie contexte| T[Tandem Connect + Tandem]
+
+  R1[Integrateur BMS\nCommissioning OT terrain] -.responsable.-> E
+  R2[Equipe plateforme\nIAM Audit Idempotence] -.responsable.-> P

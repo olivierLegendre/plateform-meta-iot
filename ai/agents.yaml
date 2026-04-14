@@ -1,0 +1,89 @@
+version: 1
+updated_at: 2026-04-01
+
+orchestrator:
+  repo: plateform-meta-iot
+  role: Cross-repo coordination and governance
+  owns:
+    - architecture governance
+    - cross-repo contracts
+    - wave planning and checkpoints
+    - decision logs and documentation
+  delegates_to:
+    - reference_api
+    - ingestion
+    - router
+    - automation
+    - operator_ui
+    - partner_integration
+    - identity_access
+    - foundation
+    - presentation
+
+reference_api:
+  repo: reference-api-service
+  role: API contracts and reference metadata
+  owns:
+    - openapi contract changes
+    - metadata mapping APIs
+    - command API integration boundaries
+
+ingestion:
+  repo: device-ingestion-service
+  role: Telemetry ingestion and normalization
+  owns:
+    - mqtt ingest flows
+    - ingestion validation/dedup
+    - ingest-side mapping adapters
+
+router:
+  repo: channel-policy-router
+  role: Command governance and routing safety
+  owns:
+    - command policy matrix
+    - idempotency/correlation routing
+    - fallback and incident signaling
+
+automation:
+  repo: automation-scenario-service
+  role: Workflow orchestration lifecycle
+  owns:
+    - approval/incidents workflows
+    - orchestration state and lineage
+
+operator_ui:
+  repo: operator-ui
+  role: Operational user workflows
+  owns:
+    - command and incident UX
+    - governance visibility screens
+
+partner_integration:
+  repo: partner-integration-layer
+  role: Partner adapters and anti-corruption mappings
+  owns:
+    - schneider/siemens/tandem adapters
+    - partner contract tests
+
+identity_access:
+  repo: identity-access-config
+  role: IAM and policy config baseline
+  owns:
+    - realm/client/role policy configs
+    - service identity scopes
+
+foundation:
+  repo: platform-foundation
+  role: Runtime platform and observability baseline
+  owns:
+    - infra baselines
+    - shared observability and runbooks
+
+presentation:
+  repo: plateform-meta-iot
+  role: Markdown-to-DOCX/PDF presentation packaging with shared templates
+  owns:
+    - markdown report normalization for export
+    - reusable template profile application
+    - docx/pdf generation workflow guidance
+    - export quality checks for stakeholder delivery

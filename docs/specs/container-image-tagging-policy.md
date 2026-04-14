@@ -1,0 +1,67 @@
+# Container Image And Tagging Policy
+
+> AUTHORITATIVE: This document is part of the normative project specification and governance baseline.
+
+
+Date: 2026-03-18
+Owner: Platform Architecture
+Registry org (current): `olivierlegendre`
+
+## 1. Purpose
+
+Define canonical container image naming and tag rules for all deployable services.
+This policy applies to production manifests and release gates.
+
+## 2. Registry and visibility
+
+1. Registry: `ghcr.io`
+2. Organization namespace (current): `olivierlegendre`
+3. Visibility: private by default
+
+## 3. Naming convention
+
+Image repository format:
+
+`ghcr.io/olivierlegendre/<service-name>`
+
+Service names are kebab-case and match repository/component ownership names.
+
+## 4. Tagging convention
+
+Use immutable tags for deployment manifests.
+
+Allowed immutable tags:
+1. release semver: `v<MAJOR>.<MINOR>.<PATCH>` (example: `v1.0.0`)
+2. commit tag: `sha-<12+ hex chars>` (example: `sha-a1b2c3d4e5f6`)
+
+Non-immutable tags such as `latest` or branch names are forbidden in production manifests.
+
+## 5. Canonical service map
+
+1. `reference-api-service` -> `ghcr.io/olivierlegendre/reference-api-service`
+2. `device-ingestion-service` -> `ghcr.io/olivierlegendre/device-ingestion-service`
+3. `channel-policy-router` -> `ghcr.io/olivierlegendre/channel-policy-router`
+4. `automation-scenario-service` -> `ghcr.io/olivierlegendre/automation-scenario-service`
+5. `operator-ui` -> `ghcr.io/olivierlegendre/operator-ui`
+6. `identity-access-config` helpers (if containerized) -> `ghcr.io/olivierlegendre/identity-access-config`
+7. `runtime-secrets-validator` -> `ghcr.io/olivierlegendre/runtime-secrets-validator`
+
+Official third-party runtime images may remain upstream-published (for example `hashicorp/vault`).
+
+## 6. Release requirements
+
+Before declaring a wave production-ready:
+1. all production manifests use `ghcr.io/olivierlegendre/...` (or approved third-party images);
+2. all internal service images use immutable tags;
+3. image tags are published and pullable by deployment runtime credentials;
+4. topology and readiness gates are green;
+5. owner signoff is recorded.
+
+## 7. Wave 8 Hardening Controls
+
+Wave 8 activates the following controls as required release gates:
+
+1. Signed provenance/SBOM generation and verification in CI.
+2. Vulnerability scanning gate with agreed severity thresholds.
+3. OIDC-backed publish/sign identity (no PAT release path).
+4. Namespace set to `ghcr.io/olivierlegendre/...` across workflows and deployment manifests.

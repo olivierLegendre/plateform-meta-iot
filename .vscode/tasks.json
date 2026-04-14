@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AI: Start Orchestrator",
+      "type": "shell",
+      "command": "./scripts/ai_start.sh",
+      "options": {
+        "cwd": "${workspaceFolder}/plateform-meta-iot"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AI: Open Active Wave",
+      "type": "shell",
+      "command": "sed -n '1,220p' ai/tasks/active-wave.md",
+      "options": {
+        "cwd": "${workspaceFolder}/plateform-meta-iot"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AI: Open Agent Registry",
+      "type": "shell",
+      "command": "sed -n '1,260p' ai/agents.yaml",
+      "options": {
+        "cwd": "${workspaceFolder}/plateform-meta-iot"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

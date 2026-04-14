@@ -1,0 +1,32 @@
+<mxfile host="app.diagrams.net" agent="codex" version="24.7.17" type="device">
+  <diagram id="optBL0" name="Option-B-L0">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="10" value="Besoin: unifier IoT et BMS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E6;strokeColor=#B26A00;fontColor=#4A2A00;" vertex="1" parent="1"><mxGeometry x="40" y="80" width="250" height="70" as="geometry"/></mxCell>
+        <mxCell id="11" value="Besoin: securite et audit" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E6;strokeColor=#B26A00;fontColor=#4A2A00;" vertex="1" parent="1"><mxGeometry x="40" y="190" width="250" height="70" as="geometry"/></mxCell>
+        <mxCell id="12" value="Besoin: multi-partenaires" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E6;strokeColor=#B26A00;fontColor=#4A2A00;" vertex="1" parent="1"><mxGeometry x="40" y="300" width="250" height="70" as="geometry"/></mxCell>
+        <mxCell id="13" value="Besoin: digital twin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E6;strokeColor=#B26A00;fontColor=#4A2A00;" vertex="1" parent="1"><mxGeometry x="40" y="410" width="250" height="70" as="geometry"/></mxCell>
+
+        <mxCell id="20" value="Plateforme de gouvernance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FF;strokeColor=#1F4E79;fontColor=#0B1F33;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="390" y="220" width="300" height="120" as="geometry"/></mxCell>
+
+        <mxCell id="30" value="Valeur: interop MQTT BACnet Modbus KNX" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF7EE;strokeColor=#2E7D32;fontColor=#102A12;" vertex="1" parent="1"><mxGeometry x="790" y="60" width="320" height="80" as="geometry"/></mxCell>
+        <mxCell id="31" value="Valeur: point d'entree unique batiment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF7EE;strokeColor=#2E7D32;fontColor=#102A12;" vertex="1" parent="1"><mxGeometry x="790" y="180" width="320" height="80" as="geometry"/></mxCell>
+        <mxCell id="32" value="Valeur: echelle multi-sites" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF7EE;strokeColor=#2E7D32;fontColor=#102A12;" vertex="1" parent="1"><mxGeometry x="790" y="300" width="320" height="80" as="geometry"/></mxCell>
+        <mxCell id="33" value="Valeur: sync Tandem telemetrie/contexte" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF7EE;strokeColor=#2E7D32;fontColor=#102A12;" vertex="1" parent="1"><mxGeometry x="790" y="420" width="320" height="80" as="geometry"/></mxCell>
+
+        <mxCell id="100" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="10" target="20"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="11" target="20"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="102" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="12" target="20"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="103" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="13" target="20"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;endArrow=block;endFill=1;" edge="1" parent="1" source="20" target="30"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;endArrow=block;endFill=1;" edge="1" parent="1" source="20" target="31"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="106" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;endArrow=block;endFill=1;" edge="1" parent="1" source="20" target="32"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="107" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;endArrow=block;endFill=1;" edge="1" parent="1" source="20" target="33"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

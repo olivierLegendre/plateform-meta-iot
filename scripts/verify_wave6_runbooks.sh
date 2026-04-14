@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-REPORT_PATH="${1:-$ROOT/plateform-meta-iot/docs/wave-6-runbook-verification-report.md}"
+REPORT_PATH="${1:-$ROOT/plateform-meta-iot/docs/reports/wave/wave-6-runbook-verification-report.md}"
 
 repos=(
   reference-api-service

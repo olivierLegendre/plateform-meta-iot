@@ -1,0 +1,12 @@
+
+# Python packaging artifacts
+*.egg-info/
+*.egg
+.eggs/
+
+# Generated documentation exports (keep source .md/.mmd/.drawio tracked)
+docs/diagrams/*.svg
+docs/diagrams/*.png
+docs/diagrams/*.pdf
+docs/diagrams/*.html
+docs/presentations/exports/

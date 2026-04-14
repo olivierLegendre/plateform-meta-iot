@@ -1,0 +1,121 @@
+@page {
+  size: A4;
+  margin: 20mm;
+}
+
+:root {
+  --ramery-blue: #004383;
+  --ramery-red: #D92026;
+  --ramery-gray: #4A4A49;
+}
+
+body {
+  font-family: "Lexend", Arial, sans-serif;
+  color: #4A4A49;
+  color: var(--ramery-gray);
+  line-height: 1.45;
+  font-size: 11pt;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Lexend", Arial, sans-serif;
+  color: #004383;
+  color: var(--ramery-blue);
+  page-break-after: avoid;
+}
+
+h1 {
+  font-size: 24pt;
+  border-bottom: 2px solid #D92026;
+  border-bottom: 2px solid var(--ramery-red);
+  padding-bottom: 4px;
+  margin-top: 8px;
+}
+
+h1::before {
+  content: "";
+  display: block;
+  width: 220px;
+  height: 78px;
+  margin-bottom: 8px;
+  background: url("assets/ramery-logo-baseline.png") no-repeat left center;
+  background-size: contain;
+}
+
+h2 {
+  font-size: 16pt;
+  margin-top: 20px;
+}
+
+/* A-F macro blocks */
+.bloc {
+  border-bottom: 3px solid #004383;
+  border-bottom: 3px solid var(--ramery-blue);
+  padding-bottom: 5px;
+  margin-bottom: 12px;
+}
+
+h3 {
+  font-size: 13pt;
+  margin-top: 14px;
+  margin-left: 22px;
+  padding-left: 12px;
+  border-left: 4px solid #9fb9d6;
+}
+
+p, li {
+  orphans: 3;
+  widows: 3;
+}
+
+a {
+  color: #004383;
+  color: var(--ramery-blue);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0 14px 0;
+  font-size: 10.5pt;
+}
+
+th {
+  background: #EAF1F8;
+  color: #002A52;
+  text-align: left;
+  border: 1px solid #B8CBE0;
+  padding: 6px 8px;
+}
+
+td {
+  border: 1px solid #D4DEE8;
+  padding: 6px 8px;
+  vertical-align: top;
+}
+
+blockquote {
+  border-left: 4px solid #D92026;
+  border-left: 4px solid var(--ramery-red);
+  padding-left: 10px;
+  color: #333333;
+}
+
+code {
+  font-family: "Lexend", Arial, sans-serif;
+  font-size: 9.5pt;
+}
+
+img {
+  max-width: 100%;
+}
+
+.title-block {
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: #4A4A49;
+  color: var(--ramery-gray);
+  font-style: italic;
+}

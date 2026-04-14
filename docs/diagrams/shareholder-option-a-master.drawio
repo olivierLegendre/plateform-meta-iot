@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net" agent="codex" version="24.7.17" type="device">
+  <diagram id="optA" name="Option-A-Master">
+    <mxGraphModel dx="1800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="10" value="Besoins actionnaires&lt;br&gt;- Unifier IoT + BMS&lt;br&gt;- Gouvernance centrale&lt;br&gt;- Multi-partenaires&lt;br&gt;- Digital Twin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E6;strokeColor=#B26A00;fontColor=#4A2A00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="320" height="150" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="20" value="Terrain IoT sans fil&lt;br&gt;LoRaWAN / Zigbee / Z-Wave (roadmap)&lt;br&gt;Gateway / Coordinator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF7EE;strokeColor=#2E7D32;fontColor=#102A12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="230" width="320" height="130" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="30" value="BMS filaire&lt;br&gt;BACnet / Modbus / KNX&lt;br&gt;Point d'entree unique batiment&lt;br&gt;AS-P / PXC / equivalents" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF7EE;strokeColor=#2E7D32;fontColor=#102A12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="320" height="150" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="40" value="Responsabilite integrateur BMS&lt;br&gt;Commissioning site&lt;br&gt;Mapping points/adresses&lt;br&gt;Topologie OT + securite locale" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#6B8FB3;fontColor=#0B1F33;" vertex="1" parent="1">
+          <mxGeometry x="40" y="590" width="320" height="140" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="50" value="Plateforme (responsabilite centrale)&lt;br&gt;operator-ui&lt;br&gt;identity-access-config&lt;br&gt;device-ingestion-service&lt;br&gt;reference-api-service&lt;br&gt;channel-policy-router&lt;br&gt;automation-scenario-service&lt;br&gt;partner-integration-layer&lt;br&gt;platform-foundation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FF;strokeColor=#1F4E79;fontColor=#0B1F33;" vertex="1" parent="1">
+          <mxGeometry x="450" y="200" width="430" height="420" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="60" value="Garde-fous non fonctionnels&lt;br&gt;IAM / Audit / Resilience / Observabilite / Scalabilite" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#6B8FB3;fontColor=#0B1F33;" vertex="1" parent="1">
+          <mxGeometry x="450" y="650" width="430" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="70" value="Digital Twin&lt;br&gt;Tandem Connect + Tandem&lt;br&gt;Scope: sync telemetrie/contexte&lt;br&gt;Pas d'ecriture depuis Twin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E6;strokeColor=#B26A00;fontColor=#4A2A00;" vertex="1" parent="1">
+          <mxGeometry x="980" y="280" width="330" height="170" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="80" value="Regle cle&lt;br&gt;Toutes les ecritures passent par&lt;br&gt;channel-policy-router" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6E6;strokeColor=#CC0000;fontColor=#660000;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="500" width="330" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="100" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="10" target="20"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="10" target="30"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="102" value="MQTT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="20" target="50"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="103" value="Adapters" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1F4E79;endArrow=block;endFill=1;" edge="1" parent="1" source="30" target="50"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="104" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6B8FB3;dashed=1;endArrow=block;endFill=1;" edge="1" parent="1" source="40" target="30"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="105" value="Sync telemetrie/contexte" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#B26A00;endArrow=block;endFill=1;" edge="1" parent="1" source="50" target="70"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="106" value="Writes gouvernes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#CC0000;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="50" target="80"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="107" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#CC0000;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="80" target="30"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6B8FB3;endArrow=block;endFill=1;" edge="1" parent="1" source="60" target="50"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

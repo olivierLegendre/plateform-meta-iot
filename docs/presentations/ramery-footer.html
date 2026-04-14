@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0 0.3mm 0 0;
+      font-family: "Lexend", Arial, sans-serif;
+      color: #4A4A49;
+      font-size: 9pt;
+    }
+    .footer {
+      width: 100%;
+      text-align: right;
+      box-sizing: border-box;
+    }
+    .footer-inner {
+      display: inline-flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .logo {
+      width: 94px;
+      height: auto;
+      vertical-align: middle;
+      margin-bottom: 1px;
+    }
+    .sep {
+      width: 1.6px;
+      height: 27px;
+      background: #D92026;
+      display: inline-block;
+      margin: 0 3px;
+      opacity: 1;
+      margin-bottom: -5px;
+    }
+    .num {
+      white-space: nowrap;
+      color: #D92026;
+      font-size: 9.8pt;
+      font-weight: 200;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+  </style>
+  <script>
+    function subst() {
+      var vars = {};
+      var qs = document.location.search.substring(1).split('&');
+      for (var i = 0; i < qs.length; i++) {
+        var p = qs[i].split('=', 2);
+        vars[p[0]] = decodeURIComponent(p[1] || '');
+      }
+      var page = document.getElementsByClassName('page');
+      for (var j = 0; j < page.length; j++) page[j].textContent = vars.page || '';
+    }
+  </script>
+</head>
+<body onload="subst()">
+  <div class="footer">
+    <div class="footer-inner">
+      <img class="logo" src="assets/ramery-logo-footer-baseline.png" alt="Ramery" />
+      <span class="sep" aria-hidden="true"></span>
+      <span class="num"><span class="page"></span></span>
+    </div>
+  </div>
+</body>
+</html>
