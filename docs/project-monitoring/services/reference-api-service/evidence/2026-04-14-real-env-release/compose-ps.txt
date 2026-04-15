@@ -1,0 +1,3 @@
+NAME                              IMAGE                                                  COMMAND                  SERVICE                 CREATED         STATUS                 PORTS
+compose-reference-api-service-1   ghcr.io/olivierlegendre/reference-api-service:v0.2.0   "python -m uvicorn r…"   reference-api-service   3 minutes ago   Up 3 minutes           8000/tcp
+platform-foundation-postgres      postgres:18                                            "docker-entrypoint.s…"   postgres-shared         2 hours ago     Up 2 hours (healthy)   0.0.0.0:55440->5432/tcp, [::]:55440->5432/tcp

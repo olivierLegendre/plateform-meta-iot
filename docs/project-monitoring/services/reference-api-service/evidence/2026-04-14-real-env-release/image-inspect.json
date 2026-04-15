@@ -1,0 +1,78 @@
+[
+    {
+        "Id": "sha256:45c5bc31ab3fc95a72b2034f1ae0b178e0078fac519cd22aa8e1a253adaf6b82",
+        "RepoTags": [
+            "ghcr.io/olivierlegendre/reference-api-service:sha-607c13ad91a4",
+            "ghcr.io/olivierlegendre/reference-api-service:v0.2.0"
+        ],
+        "RepoDigests": [
+            "ghcr.io/olivierlegendre/reference-api-service@sha256:45c5bc31ab3fc95a72b2034f1ae0b178e0078fac519cd22aa8e1a253adaf6b82"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-03-18T11:08:38.505782229+01:00",
+        "Config": {
+            "ExposedPorts": {
+                "8000/tcp": {}
+            },
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                "PYTHON_VERSION=3.12.13",
+                "PYTHON_SHA256=c08bc65a81971c1dd5783182826503369466c7e67374d1646519adf05207b684",
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PYTHONUNBUFFERED=1",
+                "PIP_NO_CACHE_DIR=1"
+            ],
+            "Cmd": [
+                "python",
+                "-m",
+                "uvicorn",
+                "reference_api_service.main:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000"
+            ],
+            "WorkingDir": "/app",
+            "ArgsEscaped": true
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 57950702,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:188c9b34dfbe022075d01fc4f5a305412909ef97de440783c15043e68e1b1913",
+                "sha256:1c107a897b02ca7ece069bfef2339f4e02f95f12dbb025da7305fcbe2b626f34",
+                "sha256:481070cf8ce5b1834cf16a80eec044aced637a96ef8cd1e3c193947e2ff5cbd9",
+                "sha256:addf8d91bd2117a572c640e2bd2e0d15c7adf862773498ca0aea234b7a32528e",
+                "sha256:33958941fc3abfa065a76624041827f2c2da050c46d4f7a32680351ae1a449da",
+                "sha256:675f75fdc1ab781d49b5407e66e515980c7bb1c719fd9e320abd7112c6495ce7",
+                "sha256:63c67f08cb858b76085bb1c697161392d4706ca57bf958217581ba5592f01511",
+                "sha256:06f89d707af92236e5a1d756a5869dd39653d51637843165dfd62db052711980"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-03-18T13:44:08.863636431Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:45c5bc31ab3fc95a72b2034f1ae0b178e0078fac519cd22aa8e1a253adaf6b82",
+            "size": 856
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "ghcr.io/olivierlegendre/reference-api-service"
+                }
+            ],
+            "Build": [
+                {
+                    "Ref": "xneu4happz6ano16z7j7fa1c6",
+                    "CreatedAt": "2026-03-18T14:44:08.872142633+01:00"
+                }
+            ]
+        }
+    }
+]

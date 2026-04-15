@@ -55,8 +55,9 @@ Privilege rules:
 Service repos own:
 
 1. Their own schema definitions and migration logic.
-2. Their own repository/UoW persistence implementation.
-3. Application-level restore-validation tests and evidence.
+2. Their migration tooling and execution contract (Python services standardize on Alembic).
+3. Their own repository/UoW persistence implementation.
+4. Application-level restore-validation tests and evidence.
 
 ## 6. Operational Contracts
 

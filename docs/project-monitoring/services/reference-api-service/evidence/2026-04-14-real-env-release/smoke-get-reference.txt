@@ -1,0 +1,2 @@
+200
+{"reference_id":"ref-release-proof","organization_id":"org-release","site_id":"site-a","device_id":"dev-1","label":"Release proof ref","metadata":{"source":"real-env-proof"},"updated_at":"2026-04-14T10:54:06.106643Z"}

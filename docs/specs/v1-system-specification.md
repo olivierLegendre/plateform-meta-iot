@@ -127,6 +127,7 @@ Post-V1 partner rollout order:
 5. Managed persistent volume is mandatory for shared cluster durability.
 6. Runtime and integration tests must use foundation-managed PostgreSQL, not per-service Postgres containers.
 7. Cross-service data access must occur through APIs, never direct DB-to-DB queries.
+8. Schema migrations must be executed by service migrator roles before runtime start (Python services standardize on Alembic).
 
 Normative DB operations contract:
 

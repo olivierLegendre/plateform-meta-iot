@@ -1,0 +1,21 @@
+{
+  "timestamp_utc": "2026-04-14T10:53:35Z",
+  "environment": "controlled real runtime (docker compose production profile)",
+  "service": "reference-api-service",
+  "image": "ghcr.io/olivierlegendre/reference-api-service:v0.2.0",
+  "repo_digests": [
+    "ghcr.io/olivierlegendre/reference-api-service@sha256:45c5bc31ab3fc95a72b2034f1ae0b178e0078fac519cd22aa8e1a253adaf6b82"
+  ],
+  "checks": {
+    "healthz": "PASS",
+    "write_reference": "PASS",
+    "read_reference": "PASS",
+    "list_references": "PASS",
+    "postgres_row_presence": "PASS"
+  },
+  "notes": [
+    "production env mapping enforced via REFERENCE_API_APP_ENV=production",
+    "runtime auto-init disabled via REFERENCE_API_POSTGRES_AUTO_INIT=false",
+    "schema provisioned through shared Postgres operations path before service runtime validation"
+  ]
+}

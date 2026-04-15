@@ -1,0 +1,251 @@
+[
+    {
+        "Id": "d5f4533d4fecdca4227a713bc571d1e61f6d62cb7e6dfe89afd14d19cc5b5a96",
+        "Created": "2026-04-14T10:50:12.324194585Z",
+        "Path": "python",
+        "Args": [
+            "-m",
+            "uvicorn",
+            "reference_api_service.main:app",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            "8000"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 191490,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-04-14T10:50:12.802233862Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:45c5bc31ab3fc95a72b2034f1ae0b178e0078fac519cd22aa8e1a253adaf6b82",
+        "ResolvConfPath": "/var/lib/docker/containers/d5f4533d4fecdca4227a713bc571d1e61f6d62cb7e6dfe89afd14d19cc5b5a96/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/d5f4533d4fecdca4227a713bc571d1e61f6d62cb7e6dfe89afd14d19cc5b5a96/hostname",
+        "HostsPath": "/var/lib/docker/containers/d5f4533d4fecdca4227a713bc571d1e61f6d62cb7e6dfe89afd14d19cc5b5a96/hosts",
+        "LogPath": "/var/lib/docker/containers/d5f4533d4fecdca4227a713bc571d1e61f6d62cb7e6dfe89afd14d19cc5b5a96/d5f4533d4fecdca4227a713bc571d1e61f6d62cb7e6dfe89afd14d19cc5b5a96-json.log",
+        "Name": "/compose-reference-api-service-1",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "compose_default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "unless-stopped",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": [],
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": null,
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware",
+                "/sys/devices/system/cpu/cpu0/thermal_throttle",
+                "/sys/devices/system/cpu/cpu1/thermal_throttle",
+                "/sys/devices/system/cpu/cpu2/thermal_throttle",
+                "/sys/devices/system/cpu/cpu3/thermal_throttle",
+                "/sys/devices/system/cpu/cpu4/thermal_throttle",
+                "/sys/devices/system/cpu/cpu5/thermal_throttle",
+                "/sys/devices/system/cpu/cpu6/thermal_throttle",
+                "/sys/devices/system/cpu/cpu7/thermal_throttle"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "d5f4533d4fec",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "8000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "REFERENCE_API_PERSISTENCE_BACKEND=postgres",
+                "REFERENCE_API_POSTGRES_AUTO_INIT=false",
+                "REFERENCE_API_POSTGRES_DSN=postgresql://svc_reference_api_app:dev_reference_api_app@postgres-shared:5432/reference_api",
+                "APP_ENV=production",
+                "REFERENCE_API_APP_ENV=production",
+                "SERVICE_NAME=reference-api-service",
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                "PYTHON_VERSION=3.12.13",
+                "PYTHON_SHA256=c08bc65a81971c1dd5783182826503369466c7e67374d1646519adf05207b684",
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PYTHONUNBUFFERED=1",
+                "PIP_NO_CACHE_DIR=1"
+            ],
+            "Cmd": [
+                "python",
+                "-m",
+                "uvicorn",
+                "reference_api_service.main:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000"
+            ],
+            "Image": "ghcr.io/olivierlegendre/reference-api-service:v0.2.0",
+            "Volumes": null,
+            "WorkingDir": "/app",
+            "Entrypoint": null,
+            "Labels": {
+                "com.docker.compose.config-hash": "56a58c3ad4c894e699876a1cc931be717fff467ddd59d90eb93925476981aa62",
+                "com.docker.compose.container-number": "1",
+                "com.docker.compose.depends_on": "",
+                "com.docker.compose.image": "sha256:45c5bc31ab3fc95a72b2034f1ae0b178e0078fac519cd22aa8e1a253adaf6b82",
+                "com.docker.compose.oneoff": "False",
+                "com.docker.compose.project": "compose",
+                "com.docker.compose.project.config_files": "/home/olivier/work/iot_services/platform-foundation/deploy/production/compose/reference-api.compose.yaml",
+                "com.docker.compose.project.environment_file": "/home/olivier/work/iot_services/platform-foundation/deploy/production/scripts/postgres-shared.env",
+                "com.docker.compose.project.working_dir": "/home/olivier/work/iot_services/platform-foundation/deploy/production/compose",
+                "com.docker.compose.replace": "reference-api-service-1",
+                "com.docker.compose.service": "reference-api-service",
+                "com.docker.compose.version": "5.1.2"
+            }
+        },
+        "NetworkSettings": {
+            "SandboxID": "da9f0a71ef5f715b3175e0b31b989f38f5c139f9d5eaee1c9da5e2fce7a92160",
+            "SandboxKey": "/var/run/docker/netns/da9f0a71ef5f",
+            "Ports": {
+                "8000/tcp": null
+            },
+            "Networks": {
+                "compose_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "compose-reference-api-service-1",
+                        "reference-api-service"
+                    ],
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "a2919c1c4db6d3a5aa043dac931dc3896f8382b772fe985048c645f7711871b2",
+                    "EndpointID": "6c5cd01faa93ef5b7e7ff1bbf1e6b1fc44d4581c98e5644dc18cb4db954bce1f",
+                    "Gateway": "172.19.0.1",
+                    "IPAddress": "172.19.0.3",
+                    "MacAddress": "32:cb:29:be:55:fb",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": [
+                        "compose-reference-api-service-1",
+                        "reference-api-service",
+                        "d5f4533d4fec"
+                    ]
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:8132e220a2395228b214b1cd1ef5c9f97ec2d99a8c13e03e3d6101c7d0d94407",
+            "size": 1814,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]
